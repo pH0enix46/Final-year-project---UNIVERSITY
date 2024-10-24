@@ -16,7 +16,7 @@ function LatestCollection() {
   );
 
   return (
-    <div className="my-14">
+    <div className="my-14" id="#latest">
       {/* ⏺ TITLE */}
       <div className="text-center py-8 text-3xl">
         <Title text1={"LATEST"} text2={"COLLECTIONS"} />

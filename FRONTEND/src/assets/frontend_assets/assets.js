@@ -5,6 +5,7 @@ import cart_icon from "./cart_icon.png";
 import menu_icon from "./menu_icon.png";
 import dropdown_icon from "./dropdown_icon.png";
 import hero from "./hero.jpg";
+import hero_ from "./hero_.jpg";
 
 import mac_img01 from "./products/MacBook-Air-M2-1.jpg";
 import mac_img02 from "./products/mac-m1-2.jpg";
@@ -22,6 +23,7 @@ export const assets = {
   cart_icon,
   menu_icon,
   hero,
+  hero_,
   dropdown_icon,
 };
 
