@@ -12,12 +12,12 @@ function Hero() {
         />
 
         <div>
-          <span className="w-8 md:w-11 h-[2px] bg-[#414141]"></span>
           <h2
             className={`font-sofia text-4xl mb-4 ${styles.animate} font-bold`}
           >
             BEST SELLING
           </h2>
+
           <p className="text-lg mb-8">
             Explore our top-selling Mac essentials that enhance productivity and
             creativity. These high-performance products are beloved by users for
