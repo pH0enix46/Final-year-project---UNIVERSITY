@@ -7,6 +7,6 @@
 
 ---
 
-- Snippets `rafce`
+- Snippets `rfc`
 
 ---
