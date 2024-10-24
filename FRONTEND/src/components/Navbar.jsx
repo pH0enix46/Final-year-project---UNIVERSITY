@@ -17,17 +17,17 @@ function Navbar() {
   return (
     <div className="flex items-center justify-between font-medium p-4 rounded-xl border-secondary shadow-lg">
       {/* ⏺ LOGO */}
-      <NavLink to="/">
+      <Link to="/">
         <div
           className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full ${styles.glow}`}
         >
           <img
             src={assets.logo}
             alt="mac-haven--logo"
-            className="w-16 lg:w-20 md:w-14 sm:w-10 rounded-full shadow-2xl cursor-pointer border-2 border-gray-400"
+            className="w-12 lg:w-20 md:w-14 sm:w-10 rounded-full shadow-2xl cursor-pointer border-2 border-gray-400"
           />
         </div>
-      </NavLink>
+      </Link>
       {/* ⏺ LOGO END */}
 
       {/* ⏺ NAV MAIN OPTION */}

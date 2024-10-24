@@ -1,0 +1,19 @@
+@keyframes colorChange {
+  0%,
+  100% {
+    color: #99669f;
+  }
+  25% {
+    color: #0b8686;
+  }
+  50% {
+    color: #a3a005;
+  }
+  75% {
+    color: #8f96a3;
+  }
+}
+
+.animate {
+  animation: colorChange 3s infinite;
+}

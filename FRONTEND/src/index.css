@@ -12,9 +12,9 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  background-color: #2f4f4f;
-  height: 100vh;
+  height: 100%;
 }
 
 a.active hr {
