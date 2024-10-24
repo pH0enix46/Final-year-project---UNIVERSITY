@@ -152,22 +152,35 @@ function Navbar() {
             </div>
             <span>Back</span>
           </div>
-          <NavLink className="py-2 pl-6" to="/">
+
+          <NavLink className="py-2 pl-6" to="/" onClick={mainOptionUnvisible}>
             <span className="relative hover:bg-gray-400 px-2 py-1.5 transition-all rounded-md border-2 border-transparent hover:border-gray-300 hover:text-gray-700">
               HOME
             </span>
           </NavLink>
-          <NavLink className="py-2 pl-6" to="/collection">
+          <NavLink
+            className="py-2 pl-6"
+            to="/collection"
+            onClick={mainOptionUnvisible}
+          >
             <span className="relative hover:bg-gray-400 px-2 py-1.5 transition-all rounded-md border-2 border-transparent hover:border-gray-300 hover:text-gray-700">
               COLLECTION
             </span>
           </NavLink>
-          <NavLink className="py-2 pl-6" to="/about">
+          <NavLink
+            className="py-2 pl-6"
+            to="/about"
+            onClick={mainOptionUnvisible}
+          >
             <span className="relative hover:bg-gray-400 px-2 py-1.5 transition-all rounded-md border-2 border-transparent hover:border-gray-300 hover:text-gray-700">
               ABOUT
             </span>
           </NavLink>
-          <NavLink className="py-2 pl-6" to="/contact">
+          <NavLink
+            className="py-2 pl-6"
+            to="/contact"
+            onClick={mainOptionUnvisible}
+          >
             <span className="relative hover:bg-gray-400 px-2 py-1.5 transition-all rounded-md border-2 border-transparent hover:border-gray-300 hover:text-gray-700">
               CONTACT
             </span>
