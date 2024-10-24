@@ -1,4 +1,4 @@
-const PlaceOrder = () => {
-  return <div>PlaceOrder</div>;
-};
+function PlaceOrder() {
+  return <div>placeorder</div>;
+}
 export default PlaceOrder;

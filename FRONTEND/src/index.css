@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sofia&display=swap");
+@import "daisyui/dist/full.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "daisyui/dist/full.css";
 
 * {
   margin: 0;
@@ -10,8 +13,8 @@
 }
 
 body {
-  height: 100vh;
   background-color: #2f4f4f;
+  height: 100vh;
 }
 
 a.active hr {

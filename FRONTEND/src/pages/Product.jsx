@@ -1,4 +1,4 @@
-const Product = () => {
-  return <div>Product</div>;
-};
+function Product() {
+  return <div>rfc</div>;
+}
 export default Product;

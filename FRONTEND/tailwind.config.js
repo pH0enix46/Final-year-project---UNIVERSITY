@@ -9,6 +9,11 @@ export default {
         secondary: "#4f767b",
         accent: "#a8d8d1",
       },
+
+      fontFamily: {
+        josefin: ['"Josefin Sans"', "sans-serif"],
+        sofia: ["Sofia", "sans-serif"],
+      },
     },
   },
 

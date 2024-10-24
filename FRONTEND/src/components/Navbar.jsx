@@ -17,15 +17,17 @@ function Navbar() {
   return (
     <div className="flex items-center justify-between font-medium p-4 rounded-xl border-secondary shadow-lg">
       {/* ⏺ LOGO */}
-      <div
-        className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full ${styles.glow}`}
-      >
-        <img
-          src={assets.logo}
-          alt="mac-haven--logo"
-          className="w-16 lg:w-20 md:w-14 sm:w-10 rounded-full shadow-2xl cursor-pointer border-2 border-gray-400"
-        />
-      </div>
+      <NavLink to="/">
+        <div
+          className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full ${styles.glow}`}
+        >
+          <img
+            src={assets.logo}
+            alt="mac-haven--logo"
+            className="w-16 lg:w-20 md:w-14 sm:w-10 rounded-full shadow-2xl cursor-pointer border-2 border-gray-400"
+          />
+        </div>
+      </NavLink>
       {/* ⏺ LOGO END */}
 
       {/* ⏺ NAV MAIN OPTION */}
@@ -119,13 +121,13 @@ function Navbar() {
         </Link>
         {/* ⏺ MENU ICON */}
         <div
-          className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400 sm:hidden"
+          className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400 sm:hidden cursor-pointer"
           onClick={mainOptionVisible}
         >
           <img
             src={assets.menu_icon}
             alt="menu_icon"
-            className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5 cursor-pointer"
+            className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5"
           />
         </div>
         {/* ⏺ MENU ICON END */}
@@ -135,7 +137,9 @@ function Navbar() {
       {/* ⏺ NAV MAIN OPTION FOR SMALL SCREEN */}
       <div
         className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-brand transition-all shadow-2xl rounded-3xl ${
-          visible ? "w-1/2 h-1/2 border-l-2 border-b-2 border-gray-400" : "w-0"
+          visible
+            ? "w-1/2 h-1/2 border-l-2 border-b-2 border-gray-400 z-10"
+            : "w-0"
         }`}
       >
         <div className="flex flex-col text-gray-300">
