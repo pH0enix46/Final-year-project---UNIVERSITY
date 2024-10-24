@@ -2,7 +2,16 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: "#2f4f4f", // brand color
+        primary: "#3c6b6b",
+        secondary: "#4f767b",
+        accent: "#a8d8d1",
+      },
+    },
   },
-  plugins: [],
+
+  // eslint-disable-next-line no-undef
+  plugins: [require("daisyui")],
 };
