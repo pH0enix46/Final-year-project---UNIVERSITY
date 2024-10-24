@@ -7,6 +7,6 @@
 
 ---
 
-- Snippets `rfc`
+- Snippets `rfc` `csm`
 
 ---
