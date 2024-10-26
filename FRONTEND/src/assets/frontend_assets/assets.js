@@ -6,6 +6,9 @@ import menu_icon from "./menu_icon.png";
 import dropdown_icon from "./dropdown_icon.png";
 import hero from "./hero.jpg";
 import hero_ from "./hero_.jpg";
+import exchange from "./exchange_icon.png";
+import quality from "./quality_icon.png";
+import support from "./support.png";
 
 import mac_img01 from "./products/MacBook-Air-M2-1.jpg";
 import mac_img02 from "./products/mac-m1-2.jpg";
@@ -25,6 +28,9 @@ export const assets = {
   hero,
   hero_,
   dropdown_icon,
+  exchange,
+  quality,
+  support,
 };
 
 export const products = [
