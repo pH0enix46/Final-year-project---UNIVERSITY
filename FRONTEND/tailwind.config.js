@@ -7,7 +7,6 @@ export default {
         brand: "#2f4f4f", // brand color
         primary: "#3c6b6b",
         secondary: "#4f767b",
-        accent: "#a8d8d1",
       },
 
       fontFamily: {
