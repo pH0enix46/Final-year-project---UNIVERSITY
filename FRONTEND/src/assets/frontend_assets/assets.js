@@ -51,7 +51,7 @@ export const products = [
     category: "M1",
     subCategory: "Air",
     date: 1716634345448,
-    bestseller: false,
+    bestseller: true,
   },
 
   {
@@ -90,7 +90,7 @@ export const products = [
     category: "M3",
     subCategory: "Pro",
     date: 1716634345448,
-    bestseller: true,
+    bestseller: false,
   },
 
   {
