@@ -3,6 +3,10 @@ import { assets } from "../assets/frontend_assets/assets";
 import styles from "./Footer.module.css";
 
 function Footer() {
+  function onSubmitHandler(e) {
+    e.preventDefault();
+  }
+
   return (
     <div className="mt-24 border-t-2 border-gray-500">
       <footer className="footer text-base-content p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-start justify-between grid-flow-row gap-6">
@@ -23,7 +27,6 @@ function Footer() {
           <a className="link link-hover">About us</a>
           <a className="link link-hover">Contact</a>
           <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Collection</a>
         </nav>
 
         <nav>
@@ -35,7 +38,7 @@ function Footer() {
           <a className="link link-hover">Cookie policy</a>
         </nav>
 
-        <form>
+        <form onClick={onSubmitHandler}>
           <h6 className="footer-title text-base text-gray-200 border-b border-gray-300">
             Newsletter
           </h6>
@@ -48,6 +51,8 @@ function Footer() {
               <input
                 className="input input-bordered join-item bg-primary"
                 placeholder="meow@gmail.com"
+                type="email"
+                required
               />
               <button className="btn join-item rounded-r-full transition-all hover:bg-slate-950 text-base">
                 Subscribe
