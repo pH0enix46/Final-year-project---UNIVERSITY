@@ -7,7 +7,7 @@ function AllCollection() {
   const { products } = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(filterProducts.length / itemsPerPage);
 
   const currentItems = filterProducts.slice(

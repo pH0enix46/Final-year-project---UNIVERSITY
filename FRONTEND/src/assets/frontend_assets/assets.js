@@ -17,7 +17,6 @@ import mac_img04 from "./products/mac-4.webp";
 import mac_img05 from "./products/mac-3.webp";
 import mac_img06 from "./products/mac-6.webp";
 import mac_img07 from "./products/mac-7.webp";
-import mac_img08 from "./products/mac-8.webp";
 import mac_img09 from "./products/mac-5.webp";
 import mac_img10 from "./products/mac-1.webp";
 import mac_img11 from "./products/mac-6.webp";
@@ -40,7 +39,7 @@ export const assets = {
 export const products = [
   {
     _id: "01",
-    name: "MacBook Air M2 13.6-inch 16/256GB",
+    name: "MacBook Air M2 13.6-inch 16GB/256GB",
     description:
       "The M2 chip and 16GB of RAM provide unmatched performance, and the latest version of macOS and long battery life make the MacBook Air M2 in Starlight the perfect choice for style, function, and appeal",
     price: 198000,
@@ -53,7 +52,7 @@ export const products = [
 
   {
     _id: "02",
-    name: "MacBook Air M1 13.3-inch 8/256GB",
+    name: "MacBook Air M1 13.3-inch 8GB/256GB",
     description:
       "Apple's thinnest, lightest notebook, completely transformed by the Apple M1 chip. CPU speeds up to 3.5x faster. GPU speeds up to 5x faster. Our most advanced Neural Engine for up to 9x faster machine learning",
     price: 99000,
@@ -66,7 +65,7 @@ export const products = [
 
   {
     _id: "03",
-    name: "MacBook Air M1 13.3-inch 16/256GB",
+    name: "MacBook Air M1 13.3-inch 16GB/256GB",
     description:
       "Apple's thinnest, lightest notebook, completely transformed by the Apple M1 chip. CPU speeds up to 3.5x faster. GPU speeds up to 5x faster. Our most advanced Neural Engine for up to 9x faster machine learning",
     price: 99000,
@@ -79,11 +78,11 @@ export const products = [
 
   {
     _id: "04",
-    name: "MacBook Pro M3 16-inch 18/512GB",
+    name: "MacBook Pro M3 16-inch 18GB/512GB",
     description:
       "The Apple M3 Pro 12-Core Chip delivers the power and efficiency required to manage all of your professional operations. The M3 Pro 12-Core Chip is now constructed using 3nm manufacturing technology and is paired with an 18-Core GPU",
     price: 300000,
-    image: [mac_img08],
+    image: [mac_img05],
     category: "M3",
     subCategory: "Pro",
     date: 1716634345448,
@@ -92,11 +91,11 @@ export const products = [
 
   {
     _id: "05",
-    name: "MacBook Pro M3 14-inch 18/512GB",
+    name: "MacBook Pro M3 14-inch 18GB/512GB",
     description:
       "The Apple M3 Pro 12-Core Chip delivers the power and efficiency required to manage all of your professional operations. The M3 Pro 12-Core Chip is now constructed using 3nm manufacturing technology and is paired with an 18-Core GPU",
     price: 235000,
-    image: [mac_img05],
+    image: [mac_img06],
     category: "M3",
     subCategory: "Pro",
     date: 1716634345448,
@@ -105,11 +104,11 @@ export const products = [
 
   {
     _id: "06",
-    name: "MacBook Max M3 16-inch 36/1TB",
+    name: "MacBook Max M3 16-inch 36GB/1TB",
     description:
       "The Apple MacBook Pro 16 inch M3 Max Chip Liquid Retina Display 36GB RAM 1TB SSD Space Black is the ultimate pro mobile workstation for the ultimate user, designed for all sorts of creatives such as photographers, filmmakers, 3D artists, music producers, developers, and more",
     price: 460000,
-    image: [mac_img06],
+    image: [mac_img05],
     category: "M3",
     subCategory: "Max",
     date: 1716634345448,
@@ -118,7 +117,7 @@ export const products = [
 
   {
     _id: "07",
-    name: "MacBook Max M3 16-inch 128/8TB",
+    name: "MacBook Max M3 16-inch 128GB/8TB",
     description:
       "The space-black Apple 16 MacBook Pro is designed for all sorts of creatives, including photographers, filmmakers, 3D artists, music producers, developers, and more. The system has the Apple M3 Max 16-Core Chip, which delivers the power and performance efficiency required to handle all of your professional workloads",
     price: 1095000,
@@ -131,11 +130,11 @@ export const products = [
 
   {
     _id: "08",
-    name: "MacBook Air M2 13.6-inch 8/265GB",
+    name: "MacBook Air M2 13.6-inch 8GB/265GB",
     description:
       "The Apple MacBook Air 13.6-Inch laptop is powered by the new M2 chip. It is loaded with 8GB RAM and 256GB SSD. The MacBook Air features a brilliant Retina display, a FaceTime HD camera, and studio-quality mics",
     price: 114000,
-    image: [mac_img08],
+    image: [mac_img03],
     category: "M2",
     subCategory: "Air",
     date: 1716634345448,
@@ -144,7 +143,7 @@ export const products = [
 
   {
     _id: "09",
-    name: "MacBook Air M2 13.6-inch 8/512GB",
+    name: "MacBook Air M2 13.6-inch 8GB/512GB",
     description:
       "The Apple MacBook Air 13.6-Inch laptop is powered by the new M2 chip. It is loaded with 8GB RAM and 512GB SSD. The MacBook Air features a brilliant Retina display, a FaceTime HD camera, and studio‑quality mics",
     price: 164000,
@@ -157,7 +156,7 @@ export const products = [
 
   {
     _id: "10",
-    name: "MacBook Air M3 14-inch 16/512GB",
+    name: "MacBook Air M3 14-inch 16GB/512GB",
     description:
       "The Apple MacBook Air 13 inch is equipped with cutting-edge Apple M3 technology, which incorporates an 8-core CPU, 10-core GPU, and 16-core Neural Engine, ensuring excellent performance across a wide range of applications",
     price: 200000,
@@ -170,7 +169,7 @@ export const products = [
 
   {
     _id: "11",
-    name: "MacBook Pro M3 14-inch 8/512GB",
+    name: "MacBook Pro M3 14-inch 8GB/512GB",
     description:
       "The Apple MacBook Pro with the breakthrough M3 CPU provides unprecedented performance with an 8-core CPU, 10-core GPU, and 16-core Neural Engine",
     price: 190000,
@@ -183,7 +182,7 @@ export const products = [
 
   {
     _id: "12",
-    name: "MacBook Max M3 16-inch 128/8TB",
+    name: "MacBook Max M3 16-inch 128GB/8TB",
     description:
       "The space-black Apple 16 MacBook Pro is designed for all sorts of creatives, including photographers, filmmakers, 3D artists, music producers, developers, and more",
     price: 1090000,
@@ -191,6 +190,84 @@ export const products = [
     category: "M3",
     subCategory: "Max",
     date: 1916654315448,
+    bestseller: false,
+  },
+
+  {
+    _id: "13",
+    name: "MacBook Air M2 15-inch 8GB/256GB",
+    description:
+      "The Apple MacBook Air 15.3-Inch laptop is powered by the new M2 chip. It is loaded with 8GB RAM and 256GB SSD. The MacBook Air features a brilliant Retina display",
+    price: 160000,
+    image: [mac_img07],
+    category: "M2",
+    subCategory: "Air",
+    date: 1916654315948,
+    bestseller: true,
+  },
+
+  {
+    _id: "14",
+    name: "MacBook Air M3 15-inch 8GB/256GB",
+    description:
+      "The Apple MacBook Air 15-inch with advanced Apple M3 chips, which include an 8-core CPU, 10-core GPU, and 16-core Neural Engine, ensuring excellent performance across a wide range of applications",
+    price: 170000,
+    image: [mac_img01],
+    category: "M3",
+    subCategory: "Air",
+    date: 1916954315948,
+    bestseller: false,
+  },
+
+  {
+    _id: "15",
+    name: "MacBook Max M3 15-inch 128GB/8TB",
+    description:
+      "The space-black Apple 16 MacBook Pro is designed for all sorts of creatives, including photographers, filmmakers, 3D artists, music producers, developers, and more",
+    price: 1096000,
+    image: [mac_img05],
+    category: "M3",
+    subCategory: "Max",
+    date: 1916954315940,
+    bestseller: false,
+  },
+
+  {
+    _id: "16",
+    name: "MacBook Max M3 15-inch 36GB/1TB",
+    description:
+      "The Apple MacBook Pro 14 inch M3 Max Chip Liquid Retina Display 36GB RAM 1TB SSD is the ultimate workstation for the ultimate user, designed for photographers, filmmakers, 3D artists, music producers, developers, and more",
+    price: 466000,
+    image: [mac_img02],
+    category: "M3",
+    subCategory: "Max",
+    date: 1916954315940,
+    bestseller: false,
+  },
+
+  {
+    _id: "17",
+    name: "MacBook Pro M3 14-inch 18GB/1TB",
+    description:
+      "The Apple 14 MacBook Pro space black is designed for all sorts of creatives, including photographers, filmmakers, 3D artists, music producers, developers, and more",
+    price: 310000,
+    image: [mac_img04],
+    category: "M3",
+    subCategory: "Pro",
+    date: 1916454315940,
+    bestseller: false,
+  },
+
+  {
+    _id: "18",
+    name: "MacBook Air M2 14-inch 8GB/512GB",
+    description:
+      "The Apple MacBook Air 15.3-Inch laptop is powered by the new M2 chip. It is loaded with 8GB RAM and 512GB SSD. The MacBook Air features a brilliant Retina display, a FaceTime HD camera, and studio‑quality mics",
+    price: 173000,
+    image: [mac_img05],
+    category: "M2",
+    subCategory: "Air",
+    date: 1916954315940,
     bestseller: false,
   },
 ];
