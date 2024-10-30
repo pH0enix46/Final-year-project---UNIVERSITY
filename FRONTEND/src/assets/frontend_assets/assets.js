@@ -18,6 +18,10 @@ import mac_img05 from "./products/macbook-pro-14-inch-space-black-5.webp";
 import mac_img06 from "./products/apple-m3-max-6.jpg";
 import mac_img07 from "./products/apple-m3-maxPower-7.jpg";
 import mac_img08 from "./products/macbook-air-m2-8.webp";
+import mac_img09 from "./products/macbook-air-m2-512gb-9.webp";
+import mac_img10 from "./products/macbook-air-13-inch-m3-space-gray-10.webp";
+import mac_img11 from "./products/macbook-pro-m3-space-gray-11.webp";
+import mac_img12 from "./products/macbook-pro-16-inch-m3-pro-black-12.webp";
 
 export const assets = {
   logo,
@@ -136,5 +140,57 @@ export const products = [
     subCategory: "Air",
     date: 1716634345448,
     bestseller: true,
+  },
+
+  {
+    _id: "09",
+    name: "Apple MacBook Air (2022) Apple M2 Chip 13.6-Inch Liquid Retina Display 8GB RAM 512GB SSD Midnight",
+    description:
+      "The Apple MacBook Air 13.6-Inch laptop is powered by the new M2 chip. It is loaded with 8GB RAM and 512GB SSD. The MacBook Air features a brilliant Retina display, a FaceTime HD camera, and studio‑quality mics",
+    price: 164000,
+    image: [mac_img09],
+    category: "M2",
+    subCategory: "Air",
+    date: 1716634315448,
+    bestseller: false,
+  },
+
+  {
+    _id: "10",
+    name: "Apple MacBook Air 13 inch M3 Chip (2024) Liquid Retina Display 16GB RAM 512GB SSD Space Grey",
+    description:
+      "The Apple MacBook Air 13 inch is equipped with cutting-edge Apple M3 technology, which incorporates an 8-core CPU, 10-core GPU, and 16-core Neural Engine, ensuring excellent performance across a wide range of applications",
+    price: 200000,
+    image: [mac_img10],
+    category: "M3",
+    subCategory: "Air",
+    date: 1716694315448,
+    bestseller: true,
+  },
+
+  {
+    _id: "11",
+    name: "Apple MacBook Pro 14 inch M3 Chip Liquid Retina Display 8GB RAM 512GB SSD Space Gray",
+    description:
+      "The Apple MacBook Pro with the breakthrough M3 CPU provides unprecedented performance with an 8-core CPU, 10-core GPU, and 16-core Neural Engine",
+    price: 190000,
+    image: [mac_img11],
+    category: "M3",
+    subCategory: "Pro",
+    date: 1916694315448,
+    bestseller: true,
+  },
+
+  {
+    _id: "12",
+    name: "Apple MacBook Pro 16 inch M3 Max Chip Liquid Retina Display 128GB RAM 8TB SSD Space Black",
+    description:
+      "The space-black Apple 16 MacBook Pro is designed for all sorts of creatives, including photographers, filmmakers, 3D artists, music producers, developers, and more",
+    price: 1090000,
+    image: [mac_img12],
+    category: "M3",
+    subCategory: "Max",
+    date: 1916634315448,
+    bestseller: false,
   },
 ];

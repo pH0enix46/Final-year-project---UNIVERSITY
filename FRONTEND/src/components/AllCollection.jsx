@@ -1,6 +1,19 @@
+import { useContext, useEffect, useState } from "react";
 import Title from "./Title";
+import { ShopContext } from "../context/ShopContext";
+import ProductItem from "./ProductItem";
 
 function AllCollection() {
+  const { products } = useContext(ShopContext);
+  const [filterProducts, setFilterProducts] = useState([]);
+
+  useEffect(
+    function () {
+      setFilterProducts(products);
+    },
+    [products]
+  );
+
   return (
     <div className="flex-1">
       <div className="flex justify-between text-base sm:text-2xl mb-4">
@@ -16,6 +29,20 @@ function AllCollection() {
         </select>
         {/* ⏺ SORT END */}
       </div>
+
+      {/* ⏺ ALL-PRODUCT */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+        {filterProducts.map((item, i) => (
+          <ProductItem
+            key={i}
+            name={item.name}
+            id={item._id}
+            price={item.price}
+            image={item.image}
+          />
+        ))}
+      </div>
+      {/* ⏺ ALL-PRODUCT END */}
     </div>
   );
 }

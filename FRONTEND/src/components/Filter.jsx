@@ -1,7 +1,9 @@
-/* eslint-disable react/prop-types */
+import { useState } from "react";
 import { assets } from "../assets/frontend_assets/assets";
 
-function Filter({ showFilter, setShowFilter }) {
+function Filter() {
+  const [showFilter, setShowFilter] = useState(false);
+
   return (
     <div>
       {/* ⏺ FILTER PART */}
