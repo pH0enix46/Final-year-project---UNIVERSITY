@@ -6,6 +6,18 @@ import ProductItem from "./ProductItem";
 function AllCollection() {
   const { products } = useContext(ShopContext);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(filterProducts.length / itemsPerPage);
+
+  const currentItems = filterProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(
     function () {
@@ -32,7 +44,7 @@ function AllCollection() {
 
       {/* ⏺ ALL-PRODUCT */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
-        {filterProducts.map((item, i) => (
+        {currentItems.map((item, i) => (
           <ProductItem
             key={i}
             name={item.name}
@@ -41,6 +53,32 @@ function AllCollection() {
             image={item.image}
           />
         ))}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-4">
+        <div className="join shadow-xl">
+          <button
+            className="join-item btn text-3xl"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            «
+          </button>
+
+          {/* Current Page Display */}
+          <button className="bg-cyan-950 border-cyan-950 join-item btn hover:bg-sky-950 hover:border-sky-950">
+            Page {currentPage} of {totalPages}
+          </button>
+
+          <button
+            className="join-item btn text-3xl"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            »
+          </button>
+        </div>
       </div>
       {/* ⏺ ALL-PRODUCT END */}
     </div>
