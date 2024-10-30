@@ -8,12 +8,12 @@ function ProductItem({ id, image, name, price }) {
 
   return (
     <Link to={`/product/${id}`} className="text-gray-400 cursor-pointer">
-      <div className="card bg-base-100 shadow-2xl rounded-lg overflow-hidden h-[370px] border-2 border-gray-600">
-        <figure className="relative w-full h-auto sm:h-56 md:h-52">
+      <div className="card bg-base-100 shadow-2xl rounded-lg overflow-hidden h-[300px] border-2 border-gray-600">
+        <figure className="relative w-full h-full md:h-44">
           <img
             src={image[0]}
             alt="product"
-            className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
+            className="object-cover w-auto h-auto transition-transform duration-300 hover:scale-110"
           />
         </figure>
 
