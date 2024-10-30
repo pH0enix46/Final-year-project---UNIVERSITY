@@ -16,7 +16,6 @@ function OurPolicy() {
         <p className="text-gray-400 text-base sm:text-sm lg:text-base">
           Changed your mind? Our simple exchange process is here for you!
         </p>
-        <p></p>
       </div>
 
       <div className="border-primary rounded-2xl bg-cyan-950 shadow-2xl py-4 px-2 border-2">
@@ -30,9 +29,8 @@ function OurPolicy() {
           7 Days Return Policy
         </span>
         <p className="text-gray-400 text-base sm:text-sm lg:text-base">
-          Shop with confidence! Enjoy our 7 Days Return Policy!
+          Shop with confidence! Enjoy 7 Days Return Policy!
         </p>
-        <p></p>
       </div>
 
       <div className="border-primary rounded-2xl bg-cyan-950 shadow-2xl py-4 px-2 border-2">
@@ -48,7 +46,6 @@ function OurPolicy() {
         <p className="text-gray-400 text-base sm:text-sm lg:text-base">
           We’re here for you! Enjoy our friendly customer support!
         </p>
-        <p></p>
       </div>
     </div>
   );
