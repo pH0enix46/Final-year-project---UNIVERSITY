@@ -1,8 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { assets } from "../assets/frontend_assets/assets";
 
 function Filter() {
   const [showFilter, setShowFilter] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+
+  function toggleCategory(e) {
+    if (category.includes(e.target.value)) {
+      setCategory((prev) => prev.filter((item) => item !== e.target.value));
+    } else {
+      setCategory((prev) => [...prev, e.target.value]);
+    }
+  }
+
+  useEffect(
+    function () {
+      console.log(category);
+    },
+    [category]
+  );
 
   return (
     <div>
@@ -36,6 +53,7 @@ function Filter() {
                   type="checkbox"
                   className="checkbox checkbox-xs"
                   value={"M1"}
+                  onChange={toggleCategory}
                 />
                 <span className="label-text">M1</span>
               </label>
@@ -46,6 +64,7 @@ function Filter() {
                   type="checkbox"
                   className="checkbox checkbox-xs"
                   value={"M2"}
+                  onChange={toggleCategory}
                 />
                 <span className="label-text">M2</span>
               </label>
@@ -56,6 +75,7 @@ function Filter() {
                   type="checkbox"
                   className="checkbox checkbox-xs"
                   value={"M3"}
+                  onChange={toggleCategory}
                 />
                 <span className="label-text">M3</span>
               </label>

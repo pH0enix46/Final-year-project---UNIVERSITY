@@ -15,9 +15,9 @@ function AllCollection() {
     currentPage * itemsPerPage
   );
 
-  const handlePageChange = (pageNumber) => {
+  function handlePageChange(pageNumber) {
     setCurrentPage(pageNumber);
-  };
+  }
 
   useEffect(
     function () {
