@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import { assets } from "../assets/frontend_assets/assets";
+import { assets, products } from "../assets/frontend_assets/assets";
 
-function Filter() {
+function Filter({ setFilterProducts }) {
   const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
@@ -14,12 +15,48 @@ function Filter() {
     }
   }
 
+  function toggleSubCategory(e) {
+    if (subCategory.includes(e.target.value)) {
+      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
+    } else {
+      setSubCategory((prev) => [...prev, e.target.value]);
+    }
+  }
+
+  function applyFilter() {
+    let productsCopy = products.slice();
+
+    if (category.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        category.includes(item.category)
+      );
+    }
+
+    if (subCategory.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        subCategory.includes(item.subCategory)
+      );
+    }
+
+    setFilterProducts(productsCopy);
+  }
+
   useEffect(
     function () {
-      console.log(category);
+      applyFilter();
     },
-    [category]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [category, subCategory]
   );
+
+  // ⏺ TEST
+  // useEffect(
+  //   function () {
+  //     // console.log(category);
+  //     console.log(subCategory);
+  //   },
+  //   [category, subCategory]
+  // );
 
   return (
     <div>
@@ -99,6 +136,7 @@ function Filter() {
                   type="checkbox"
                   className="checkbox checkbox-xs"
                   value={"Air"}
+                  onChange={toggleSubCategory}
                 />
                 <span className="label-text">Air</span>
               </label>
@@ -109,6 +147,7 @@ function Filter() {
                   type="checkbox"
                   className="checkbox checkbox-xs"
                   value={"Pro"}
+                  onChange={toggleSubCategory}
                 />
                 <span className="label-text">Pro</span>
               </label>
@@ -119,6 +158,7 @@ function Filter() {
                   type="checkbox"
                   className="checkbox checkbox-xs"
                   value={"Max"}
+                  onChange={toggleSubCategory}
                 />
                 <span className="label-text">Max</span>
               </label>

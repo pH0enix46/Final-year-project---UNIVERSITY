@@ -270,4 +270,30 @@ export const products = [
     date: 1916954315940,
     bestseller: false,
   },
+
+  {
+    _id: "19",
+    name: "MacBook Pro M2 13-inch 8GB/256GB",
+    description:
+      "The Apple MacBook Pro M2 8/256GB 13-inch in Space Gray is a compact powerhouse for Bangladeshis seeking performance and style. Its M2 chip ensures swift operations, while 8GB RAM supports multitasking without hiccups",
+    price: 133000,
+    image: [mac_img07],
+    category: "M2",
+    subCategory: "Pro",
+    date: 1926954315940,
+    bestseller: false,
+  },
+
+  {
+    _id: "20",
+    name: "MacBook Pro M2 14-inch 16GB/512GB",
+    description:
+      "This Apple MacBook Pro M2 comes with a stunning design, is very lightweight, and has a magnificent Silver finish. Apple has highly efficient M2 Pro chip in this MacBook which gives the user the best experience while doing heavy tasks",
+    price: 233000,
+    image: [mac_img01],
+    category: "M2",
+    subCategory: "Pro",
+    date: 1826954315940,
+    bestseller: true,
+  },
 ];

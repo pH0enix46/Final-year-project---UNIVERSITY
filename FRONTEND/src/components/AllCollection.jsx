@@ -1,31 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
 import Title from "./Title";
-import { ShopContext } from "../context/ShopContext";
 import ProductItem from "./ProductItem";
 
-function AllCollection() {
-  const { products } = useContext(ShopContext);
-  const [filterProducts, setFilterProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
-  const totalPages = Math.ceil(filterProducts.length / itemsPerPage);
-
-  const currentItems = filterProducts.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  function handlePageChange(pageNumber) {
-    setCurrentPage(pageNumber);
-  }
-
-  useEffect(
-    function () {
-      setFilterProducts(products);
-    },
-    [products]
-  );
-
+function AllCollection({
+  currentItems,
+  handlePageChange,
+  currentPage,
+  totalPages,
+}) {
   return (
     <div className="flex-1">
       <div className="flex justify-between text-base sm:text-2xl mb-4 items-center">
