@@ -1,62 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
-import { assets, products } from "../assets/frontend_assets/assets";
+import { useState } from "react";
+import { assets } from "../assets/frontend_assets/assets";
 
-function Filter({ setFilterProducts }) {
+function Filter({ toggleCategory, toggleSubCategory }) {
   const [showFilter, setShowFilter] = useState(false);
-  const [category, setCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
-
-  function toggleCategory(e) {
-    if (category.includes(e.target.value)) {
-      setCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setCategory((prev) => [...prev, e.target.value]);
-    }
-  }
-
-  function toggleSubCategory(e) {
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setSubCategory((prev) => [...prev, e.target.value]);
-    }
-  }
-
-  function applyFilter() {
-    let productsCopy = products.slice();
-
-    if (category.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
-        category.includes(item.category)
-      );
-    }
-
-    if (subCategory.length > 0) {
-      productsCopy = productsCopy.filter((item) =>
-        subCategory.includes(item.subCategory)
-      );
-    }
-
-    setFilterProducts(productsCopy);
-  }
-
-  useEffect(
-    function () {
-      applyFilter();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [category, subCategory]
-  );
-
-  // ⏺ TEST
-  // useEffect(
-  //   function () {
-  //     // console.log(category);
-  //     console.log(subCategory);
-  //   },
-  //   [category, subCategory]
-  // );
 
   return (
     <div>
