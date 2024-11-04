@@ -25,7 +25,7 @@ function Hero() {
                 Explore our top-selling Mac essentials that enhance productivity
                 and creativity. These high-performance products are beloved by
                 users for their reliability, sleek design, and seamless
-                integration within the Apple ecosystem.
+                integration within the Apple ecosystem
               </p>
 
               <NavLink to="/collection">

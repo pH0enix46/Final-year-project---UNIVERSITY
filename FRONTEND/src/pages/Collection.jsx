@@ -8,6 +8,7 @@ function Collection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
+  const [sortType, setSortType] = useState("Default");
   const itemsPerPage = 12;
   const totalPages = Math.ceil(filterProducts.length / itemsPerPage);
 
@@ -55,12 +56,38 @@ function Collection() {
     setCurrentPage(1);
   }
 
+  function sortProduct() {
+    let filterProductCopy = filterProducts.slice();
+
+    switch (sortType) {
+      case "Low > High":
+        setFilterProducts(filterProductCopy.sort((a, b) => a.price - b.price));
+        break;
+
+      case "High > Low":
+        setFilterProducts(filterProductCopy.sort((a, b) => b.price - a.price));
+        break;
+
+      default:
+        applyFilter();
+        break;
+    }
+  }
+
   useEffect(
     function () {
       applyFilter();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [category, subCategory]
+  );
+
+  useEffect(
+    function () {
+      sortProduct();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sortType]
   );
 
   // ⏺ TEST
@@ -84,6 +111,7 @@ function Collection() {
         handlePageChange={handlePageChange}
         currentPage={currentPage}
         totalPages={totalPages}
+        setSortType={setSortType}
       />
     </div>
   );

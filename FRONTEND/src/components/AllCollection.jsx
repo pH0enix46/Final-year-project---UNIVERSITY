@@ -7,6 +7,7 @@ function AllCollection({
   handlePageChange,
   currentPage,
   totalPages,
+  setSortType,
 }) {
   return (
     <div className="flex-1">
@@ -16,7 +17,10 @@ function AllCollection({
         </span>
 
         {/* ⏺ SORT */}
-        <select className="select select-bordered w-auto bg-brand border-2 shadow-md text-xs sm:text-sm">
+        <select
+          onChange={(e) => setSortType(e.target.value)}
+          className="select select-bordered w-auto bg-brand border-2 shadow-md text-xs sm:text-sm"
+        >
           <option value={"Default"}>Sort by-- Default</option>
           <option value={"Low > High"}>Sort by-- Low &gt; High</option>
           <option value={"High > Low"}>Sort by-- High &gt; Low</option>
@@ -25,7 +29,7 @@ function AllCollection({
       </div>
 
       {/* ⏺ ALL-PRODUCT */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 gap-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 gap-y-6">
         {currentItems.map((item, i) => (
           <ProductItem
             key={i}

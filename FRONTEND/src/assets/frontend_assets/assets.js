@@ -68,7 +68,7 @@ export const products = [
     name: "MacBook Air M1 13.3-inch 16GB/256GB",
     description:
       "Apple's thinnest, lightest notebook, completely transformed by the Apple M1 chip. CPU speeds up to 3.5x faster. GPU speeds up to 5x faster. Our most advanced Neural Engine for up to 9x faster machine learning",
-    price: 99000,
+    price: 140000,
     image: [mac_img03],
     category: "M1",
     subCategory: "Air",
