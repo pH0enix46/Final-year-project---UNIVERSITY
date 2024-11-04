@@ -9,6 +9,7 @@ import hero_ from "./hero_.jpg";
 import exchange from "./exchange_icon.png";
 import quality from "./quality_icon.png";
 import support from "./support.png";
+import cross_icon from "./cross_icon.png";
 
 import mac_img01 from "./products/mac-1.webp";
 import mac_img02 from "./products/mac-2.webp";
@@ -34,6 +35,7 @@ export const assets = {
   exchange,
   quality,
   support,
+  cross_icon,
 };
 
 export const products = [

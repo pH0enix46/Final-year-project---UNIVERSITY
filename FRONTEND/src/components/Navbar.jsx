@@ -1,10 +1,12 @@
 import { assets } from "../assets/frontend_assets/assets";
 import { Link, NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 function Navbar() {
   const [visible, setVisible] = useState(false);
+  const { setShowSearch } = useContext(ShopContext);
 
   function mainOptionVisible() {
     setVisible(true);
@@ -78,6 +80,7 @@ function Navbar() {
             src={assets.serach_icon}
             alt="search_icon"
             className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5 cursor-pointer"
+            onClick={() => setShowSearch((prev) => !prev)}
           />
         </div>
 
