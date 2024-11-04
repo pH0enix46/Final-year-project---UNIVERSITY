@@ -1,7 +1,7 @@
 import Filter from "../components/Filter.jsx";
 import AllCollection from "../components/AllCollection.jsx";
-import { useEffect, useState } from "react";
-import { products } from "../assets/frontend_assets/assets.js";
+import { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext.jsx";
 
 function Collection() {
   const [filterProducts, setFilterProducts] = useState([]);
@@ -9,6 +9,7 @@ function Collection() {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("Default");
+  const { products, search, showSearch } = useContext(ShopContext);
   const itemsPerPage = 12;
   const totalPages = Math.ceil(filterProducts.length / itemsPerPage);
 
@@ -39,6 +40,12 @@ function Collection() {
 
   function applyFilter() {
     let productsCopy = products.slice();
+
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
@@ -79,7 +86,7 @@ function Collection() {
       applyFilter();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [category, subCategory]
+    [category, subCategory, search, showSearch]
   );
 
   useEffect(
