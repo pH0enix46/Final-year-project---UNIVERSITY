@@ -50,6 +50,23 @@ export const products = [
     subCategory: "Air",
     date: 1716634345448,
     bestseller: true,
+
+    brand: "Apple",
+    model: "M2 Air chip",
+    displaySize: "13.6-inch",
+    displayType: "Liquid Retina display",
+    resolution: "2560x1664",
+    ram: "16GB",
+    storageType: "SSD",
+    storageCapacity: "256GB",
+    keyboardType: "Backlit Magic Keyboard",
+    webCam: "1080p FaceTime HD camera",
+    speaker: "Four-speaker sound system",
+    wifi: "802.11ax Wi-Fi 6 wireless networking IEEE 802.11a/b/g/n/ac compatible",
+    operatingSystem: "macOS",
+    batteryType: "Lithium-polymer",
+    batteryCapacity: "52.6-watt-hour",
+    warrantyDetails: "1 Year Warranty",
   },
 
   {

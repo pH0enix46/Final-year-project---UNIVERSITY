@@ -106,8 +106,10 @@ function Product() {
             <div className="flex gap-4">
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-8 h-8 bg-gray-400 border-2 border-gray-600 rounded-full cursor-pointer shadow-xl ${
-                    color === "Silver" ? "border-blue-600 border-4" : ""
+                  className={`w-8 h-8 bg-gray-400 rounded-full cursor-pointer shadow-xl ${
+                    color === "Silver"
+                      ? "border-4 border-blue-600"
+                      : "border-2 border-gray-600"
                   }`}
                   title="Silver"
                   onClick={() => setColor("Silver")}
@@ -117,9 +119,11 @@ function Product() {
 
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-8 h-8 bg-[#4B4B4B] border-2 border-gray-500 rounded-full cursor-pointer shadow-xl ${
-                    color === "Space Gray" ? "border-blue-600 border-4" : ""
-                  }`}
+                  className={`w-8 h-8 bg-[#4B4B4B] ${
+                    color === "Space Gray"
+                      ? "border-4 border-blue-600"
+                      : "border-2 border-gray-500"
+                  } rounded-full cursor-pointer shadow-xl`}
                   title="Space Gray"
                   onClick={() => setColor("Space Gray")}
                 ></div>
@@ -128,9 +132,11 @@ function Product() {
 
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-8 h-8 bg-[#D8CBAF] border-2 border-gray-500 rounded-full cursor-pointer shadow-xl ${
-                    color === "Starlight" ? "border-blue-600 border-4" : ""
-                  }`}
+                  className={`w-8 h-8 bg-[#D8CBAF] ${
+                    color === "Starlight"
+                      ? "border-4 border-blue-600"
+                      : "border-2 border-gray-500"
+                  } rounded-full cursor-pointer shadow-xl`}
                   title="Starlight"
                   onClick={() => setColor("Starlight")}
                 ></div>
@@ -139,8 +145,10 @@ function Product() {
 
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-8 h-8 bg-[#1D1D1F] border-2 border-gray-500 rounded-full cursor-pointer shadow-xl ${
-                    color === "Midnight" ? "border-blue-600 border-4" : ""
+                  className={`w-8 h-8 bg-[#1D1D1F] rounded-full cursor-pointer shadow-xl ${
+                    color === "Midnight"
+                      ? "border-4 border-blue-600"
+                      : "border-2 border-gray-500"
                   }`}
                   title="Midnight"
                   onClick={() => setColor("Midnight")}
@@ -157,6 +165,133 @@ function Product() {
         {/* ⏺ PRODUCT INFO END */}
       </div>
       {/* ⏺ PRODUCT DATA END */}
+
+      {/* ⏺ MAIN DESCRIPTION */}
+      <div className="w-full md:w-[80%] lg:w-[70%] mt-12">
+        <div className="shadow-xl rounded-xl p-4 px-6 border-2 mt-1 border-primary">
+          <h3 className="mt-4 text-3xl flex items-center gap-4 mb-8">
+            Specification
+            <progress className="progress w-56"></progress>
+          </h3>
+
+          <div>
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Processor</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Processor Brand
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.brand}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Processor Model
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.model}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Display</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Display Size
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.displaySize}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Display Type
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.displayType}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Display Resolution
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.resolution}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Memory & Storage</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                RAM
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.ram}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Storage Type
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.storageType}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Storage Capacity
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.storageCapacity}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">
+                Keyboard, Camera & Audio
+              </h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Keyboard Type
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.keyboardType}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                WebCam
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.webCam}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Speaker
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.speaker}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Network & Connectivity</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                WiFi
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.wifi}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Software</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Operating System
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.operatingSystem}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Power</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Battery Type
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.batteryType}
+              </h6>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Battery Capacity
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.batteryCapacity}
+              </h6>
+            </div>
+
+            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
+              <h4 className="text-xl text-amber-600">Warranty</h4>
+              <h6 className="md:text-lg flex items-center gap-2">
+                Warranty Details
+                <span className="loading loading-ring loading-xs"></span>
+                {productData.warrantyDetails}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* ⏺ MAIN DESCRIPTION END */}
     </div>
   ) : (
     <div className="opacity-0"></div>
