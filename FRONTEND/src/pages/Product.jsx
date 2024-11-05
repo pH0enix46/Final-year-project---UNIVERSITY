@@ -1,4 +1,4 @@
 function Product() {
-  return <div>rfc</div>;
+  return <div></div>;
 }
 export default Product;
