@@ -33,15 +33,24 @@ function Product() {
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
         {/* ⏺ PRODUCT IMAGE */}
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
-          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
+          <div className="flex sm:flex-col justify-around sm:justify-normal sm:w-[18.7%] w-full">
             {productData.image.map((item, i) => (
               <img
                 src={item}
                 alt="product_image"
                 key={i}
-                className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer object-cover"
+                className="w-[24%] sm:w-[60%] sm:mb-3 flex-shrink-0 cursor-pointer object-cover shadow-sm rounded-lg border-2 border-gray-500"
+                onClick={() => setImage(item)}
               />
             ))}
+          </div>
+
+          <div className="w-full flex justify-center sm:justify-start">
+            <img
+              src={image}
+              alt="product_image"
+              className="object-cover border-2 rounded-lg border-gray-500 shadow-sm sm:w-[40%]"
+            />
           </div>
         </div>
         {/* ⏺ PRODUCT IMAGE END */}
