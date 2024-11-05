@@ -22,6 +22,7 @@ import mac_img09 from "./products/mac-5.webp";
 import mac_img10 from "./products/mac-1.webp";
 import mac_img11 from "./products/mac-6.webp";
 import mac_img12 from "./products/mac-2.webp";
+import mac_test from "./products/mac-text.jpg";
 
 export const assets = {
   logo,
@@ -45,7 +46,7 @@ export const products = [
     description:
       "The M2 chip and 16GB of RAM provide unmatched performance, and the latest version of macOS and long battery life make the MacBook Air M2 in Starlight the perfect choice for style, function, and appeal",
     price: 198000,
-    image: [mac_img01],
+    image: [mac_img01, mac_test],
     category: "M2",
     subCategory: "Air",
     date: 1716634345448,
