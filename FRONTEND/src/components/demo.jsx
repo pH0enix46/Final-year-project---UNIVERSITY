@@ -5,25 +5,24 @@ import RelatedProducts from "./RelatedProducts";
 
 function IndividualProduct() {
   const { productID } = useParams();
-  // console.log(productID);
   const { products, currency } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [color, setColor] = useState("");
 
+  // Map each color to the corresponding image index
   const colorToImageMapping = {
-    Silver: 0,
-    Space_Gray: 1,
-    Starlight: 2,
-    Midnight: 3,
+    Silver: 0, // assuming the 0th image is for Silver
+    "Space Gray": 1, // assuming the 1st image is for Space Gray
+    Starlight: 2, // assuming the 2nd image is for Starlight
+    Midnight: 3, // assuming the 3rd image is for Midnight
   };
 
   async function fetchProductData() {
     products.map((item) => {
       if (item._id === productID) {
         setProductData(item);
-        // console.log(item);
-        setImage(item.image[0]);
+        setImage(item.image[0]); // Default image is the first one
         return null;
       }
     });
@@ -33,14 +32,14 @@ function IndividualProduct() {
     function () {
       fetchProductData();
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [productID, products]
   );
 
   const handleColorChange = (colorName) => {
     setColor(colorName);
+    // Change image based on the selected color
     const imageIndex = colorToImageMapping[colorName];
-    setImage(productData.image[imageIndex]);
+    setImage(productData.image[imageIndex]); // Update image based on color
   };
 
   return productData ? (
@@ -140,7 +139,7 @@ function IndividualProduct() {
                       : "border-2 border-gray-500"
                   } rounded-full cursor-pointer shadow-xl`}
                   title="Space Gray"
-                  onClick={() => handleColorChange("Space_Gray")}
+                  onClick={() => handleColorChange("Space Gray")}
                 ></div>
                 <span className="text-sm mt-1">Space Gray</span>
               </div>
@@ -189,121 +188,7 @@ function IndividualProduct() {
             <progress className="progress w-56"></progress>
           </h3>
 
-          <div>
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Processor</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Processor Brand
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.brand}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Processor Model
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.model}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Display</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Display Size
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.displaySize}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Display Type
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.displayType}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Display Resolution
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.resolution}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Memory & Storage</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                RAM
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.ram}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Storage Type
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.storageType}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Storage Capacity
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.storageCapacity}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">
-                Keyboard, Camera & Audio
-              </h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Keyboard Type
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.keyboardType}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                WebCam
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.webCam}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Speaker
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.speaker}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Network & Connectivity</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                WiFi
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.wifi}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Software</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Operating System
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.operatingSystem}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Power</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Battery Type
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.batteryType}
-              </h6>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Battery Capacity
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.batteryCapacity}
-              </h6>
-            </div>
-
-            <div className="mb-4 border-2 rounded-xl border-secondary p-2 shadow-lg">
-              <h4 className="text-xl text-amber-600">Warranty</h4>
-              <h6 className="md:text-lg flex items-center gap-2">
-                Warranty Details
-                <span className="loading loading-ring loading-xs"></span>
-                {productData.warrantyDetails}
-              </h6>
-            </div>
-          </div>
+          <div>{/* Specifications */}</div>
         </div>
       </div>
       {/* ⏺ MAIN DESCRIPTION END */}
@@ -320,4 +205,5 @@ function IndividualProduct() {
     <div className="opacity-0"></div>
   );
 }
+
 export default IndividualProduct;

@@ -47,7 +47,7 @@ export const products = [
     description:
       "The M2 chip and 16GB of RAM provide unmatched performance, and the latest version of macOS and long battery life make the MacBook Air M2 in Starlight the perfect choice for style, function, and appeal",
     price: 198000,
-    image: [mac_img01, mac_img03, mac_img07],
+    image: [mac_img01, mac_img02, mac_img05, mac_img04],
     category: "M2",
     subCategory: "Air",
     date: 1716634345448,

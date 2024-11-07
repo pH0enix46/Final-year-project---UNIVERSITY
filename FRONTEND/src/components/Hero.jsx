@@ -38,7 +38,7 @@ function Hero() {
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % (totalSlides + 1));
       setIsTransitioning(true);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [totalSlides]);
 
