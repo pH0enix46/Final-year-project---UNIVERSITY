@@ -76,12 +76,15 @@ function Navbar() {
       {/* ⏺ OTHERS OPTION */}
       <div className="flex items-center lg:gap-6 md:gap-4 gap-3">
         <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400">
-          <img
-            src={assets.serach_icon}
-            alt="search_icon"
-            className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5 cursor-pointer"
-            onClick={() => setShowSearch((prev) => !prev)}
-          />
+          <NavLink to="/collection">
+            <img
+              src={assets.serach_icon}
+              alt="search_icon"
+              className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5 cursor-pointer"
+              // onClick={() => setShowSearch((prev) => !prev)}
+              onClick={() => setShowSearch(true)}
+            />
+          </NavLink>
         </div>
 
         <div className="dropdown dropdown-end">

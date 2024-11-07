@@ -55,7 +55,7 @@ function IndividualProduct() {
                 src={item}
                 alt="product_image"
                 key={i}
-                className="w-[24%] sm:w-full lg:w-[80%] sm:mb-3 flex-shrink-0 cursor-pointer object-cover shadow-sm rounded-lg border-2 border-gray-500"
+                className="w-[22%] sm:w-full lg:w-[80%] sm:mb-3 flex-shrink-0 cursor-pointer object-cover shadow-sm rounded-lg border-2 border-gray-500"
                 onClick={() => setImage(item)}
               />
             ))}
