@@ -80,7 +80,7 @@ function Hero() {
 
                     <div className="w-full lg:w-1/2">
                       <h2
-                        className={`font-sofia text-4xl mb-4 font-bold ${styles.animate}`}
+                        className={`font-itim text-4xl mb-4 font-bold ${styles.animate}`}
                       >
                         {slide.title}
                       </h2>
@@ -88,7 +88,7 @@ function Hero() {
                         {slide.description}
                       </p>
                       <NavLink to={slide.link}>
-                        <button className="btn btn-outline btn-primary border-2 text-base border-indigo-500">
+                        <button className="btn btn-outline btn-primary border-2 text-base border-indigo-500 shadow-md">
                           {slide.buttonText}
                         </button>
                       </NavLink>
@@ -101,7 +101,7 @@ function Hero() {
         </div>
       </div>
 
-      {/* Pagination Dots */}
+      {/* PAGINATION DOTS */}
       <div className="absolute mt-4 lg:mt-[-30px] left-1/2 transform -translate-x-1/2 flex space-x-2">
         {slides.map((_, index) => (
           <div

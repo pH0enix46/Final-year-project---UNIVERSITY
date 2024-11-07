@@ -116,7 +116,7 @@ function IndividualProduct() {
                   title="Silver"
                   onClick={() => setColor("Silver")}
                 ></div>
-                <span className="text-xs mt-1">Silver</span>
+                <span className="text-sm mt-1">Silver</span>
               </div>
 
               <div className="flex flex-col items-center">
@@ -129,7 +129,7 @@ function IndividualProduct() {
                   title="Space Gray"
                   onClick={() => setColor("Space Gray")}
                 ></div>
-                <span className="text-xs mt-1">Space Gray</span>
+                <span className="text-sm mt-1">Space Gray</span>
               </div>
 
               <div className="flex flex-col items-center">
@@ -142,7 +142,7 @@ function IndividualProduct() {
                   title="Starlight"
                   onClick={() => setColor("Starlight")}
                 ></div>
-                <span className="text-xs mt-1">Starlight</span>
+                <span className="text-sm mt-1">Starlight</span>
               </div>
 
               <div className="flex flex-col items-center">
@@ -155,7 +155,7 @@ function IndividualProduct() {
                   title="Midnight"
                   onClick={() => setColor("Midnight")}
                 ></div>
-                <span className="text-xs mt-1">Midnight</span>
+                <span className="text-sm mt-1">Midnight</span>
               </div>
             </div>
           </div>

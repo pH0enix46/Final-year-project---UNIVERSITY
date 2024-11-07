@@ -33,7 +33,7 @@ function Navbar() {
       {/* ⏺ LOGO END */}
 
       {/* ⏺ NAV MAIN OPTION */}
-      <ul className="hidden sm:flex lg:gap-5 md:text-sm sm:text-xs text-gray-300">
+      <ul className="hidden sm:flex lg:gap-5 sm:text-xs md:text-sm lg:text-lg text-gray-300">
         <NavLink to="/" className="flex flex-col items-center gap-1 font-bold">
           <span className="relative hover:bg-gray-400 px-2 py-1.5 transition-all rounded-md border-2 border-transparent hover:border-gray-300 hover:text-gray-700">
             HOME

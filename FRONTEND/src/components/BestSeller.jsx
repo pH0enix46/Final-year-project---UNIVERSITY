@@ -20,8 +20,11 @@ function BestSeller() {
     <div className="my-20">
       {/* ⏺ TITLE */}
       <div className="text-center py-8 text-3xl">
-        <Title text1={"BEST"} text2={"SELLERS"} />
-        <p className="w-5/6 sm:w-3/4 m-auto text-sm sm:text-base lg:text-lg text-gray-400">
+        <span className="text-3xl lg:text-4xl">
+          <Title text1={"BEST"} text2={"SELLERS"} />
+        </span>
+
+        <p className="m-auto text-base lg:text-lg text-gray-400">
           Discover our best-sellers, handpicked and loved by customers like you!
           Shop now and find the top products everyone’s talking about
         </p>

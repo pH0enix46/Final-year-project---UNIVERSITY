@@ -10,8 +10,7 @@ export default {
       },
 
       fontFamily: {
-        josefin: ['"Josefin Sans"', "sans-serif"],
-        sofia: ["Sofia", "sans-serif"],
+        itim: ["Itim", "cursive"],
       },
     },
   },

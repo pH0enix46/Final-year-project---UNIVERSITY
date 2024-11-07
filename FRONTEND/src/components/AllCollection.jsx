@@ -11,7 +11,7 @@ function AllCollection({
 }) {
   return (
     <div className="flex-1">
-      <div className="flex justify-between text-base sm:text-2xl mb-4 items-center">
+      <div className="flex justify-between mb-4 items-center">
         <span className="lg:ml-8 md:ml-4 text-base sm:text-lg md:text-xl lg:text-2xl ">
           <Title text1={"ALL"} text2={"COLLECTION"} />
         </span>
