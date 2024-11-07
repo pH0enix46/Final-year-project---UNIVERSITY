@@ -20,7 +20,7 @@ function LatestCollection() {
       {/* ⏺ TITLE */}
       <div className="text-center py-8 text-3xl">
         <Title text1={"LATEST"} text2={"COLLECTIONS"} />
-        <p className="w-5/6 sm:w-3/4 m-auto text-sm sm:text-base lg:text-lg text-gray-400">
+        <p className="w-10/12 m-auto text-base lg:text-lg text-gray-400">
           Explore our latest tech collections! Discover new gadgets and
           accessories to make your life easier. Find the perfect items to stay
           up-to-date with the latest trends!

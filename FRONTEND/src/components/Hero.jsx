@@ -1,97 +1,119 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { assets } from "../assets/frontend_assets/assets";
 import styles from "./Hero.module.css";
 
 function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const slides = [
+    {
+      title: "BEST SELLING",
+      description:
+        "Explore our top-selling Mac essentials that enhance productivity and creativity. These high-performance products are beloved by users for their reliability, sleek design, and seamless integration within the Apple ecosystem",
+      buttonText: "SHOP NOW",
+      image: assets.hero,
+      link: "/collection",
+    },
+    {
+      title: "NEW ARRIVALS",
+      description:
+        "Discover the latest Mac essentials designed to boost your productivity and style. Our new arrivals feature cutting-edge technology with sleek designs, perfect for elevating your Mac experience. Stay ahead with these must-have products",
+      buttonText: "EXPLORE NOW",
+      image: assets.hero_,
+      link: "/collection",
+    },
+    {
+      title: "TOP PICKS",
+      description:
+        "Explore our curated selection of must-have Mac accessories, chosen for their premium quality, sleek style, and reliable performance. These products are designed to elevate your Mac experience, offering both functionality and aesthetic",
+      buttonText: "DISCOVER",
+      image: assets.hero__,
+      link: "/collection",
+    },
+  ];
+  const totalSlides = slides.length;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % (totalSlides + 1));
+      setIsTransitioning(true);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [totalSlides]);
+
+  useEffect(() => {
+    if (currentSlide === totalSlides) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentSlide(0);
+      }, 1000);
+    }
+  }, [currentSlide, totalSlides]);
+
+  const handleDotClick = (index) => {
+    setCurrentSlide(index);
+    setIsTransitioning(true);
+  };
+
   return (
-    <div className="carousel w-full">
-      {/* ⏺ SLIDE 1 */}
-      <div className="carousel-item w-full relative" id="prev">
-        <div className="hero mt-8 shadow-2xl rounded-xl p-4 border-2 border-slate-500">
-          <div className="hero-content flex-col lg:flex-row-reverse justify-between md:gap-10 gap-8">
-            <img
-              src={assets.hero}
-              className="sm:max-w-md h-auto rounded-xl shadow-2xl border-2 border-primary"
-            />
+    <>
+      <div className="relative w-full overflow-hidden">
+        <div
+          className={`flex w-full ${
+            isTransitioning
+              ? "transition-transform duration-1000 ease-in-out"
+              : ""
+          }`}
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {[...slides, slides[0]].map((slide, index) => (
+            <div key={index} className="w-full flex-shrink-0">
+              <div className="flex justify-center items-center min-h-[400px] lg:min-h-[500px] w-full">
+                <div className="hero mt-8 shadow-md p-4 border-t-2 border-b-2 border-slate-500 w-full max-w-full">
+                  <div className="hero-content flex flex-col lg:flex-row-reverse justify-between md:gap-10 gap-8 w-full px-4 shadow-lg rounded-lg">
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className="sm:max-w-md h-auto rounded-xl shadow-lg border-2 border-primary"
+                    />
 
-            <div>
-              <h2
-                className={`font-sofia text-4xl mb-4 ${styles.animate} font-bold`}
-              >
-                BEST SELLING
-              </h2>
-
-              <p className="text-lg mb-8">
-                Explore our top-selling Mac essentials that enhance productivity
-                and creativity. These high-performance products are beloved by
-                users for their reliability, sleek design, and seamless
-                integration within the Apple ecosystem
-              </p>
-
-              <NavLink to="/collection">
-                <button className="btn btn-outline btn-primary shadow-lg border-2 text-base border-indigo-500">
-                  SHOP NOW
-                </button>
-              </NavLink>
+                    <div className="w-full lg:w-1/2">
+                      <h2
+                        className={`font-sofia text-4xl mb-4 font-bold ${styles.animate}`}
+                      >
+                        {slide.title}
+                      </h2>
+                      <p className="text-base md:text-lg mb-8">
+                        {slide.description}
+                      </p>
+                      <NavLink to={slide.link}>
+                        <button className="btn btn-outline btn-primary border-2 text-base border-indigo-500">
+                          {slide.buttonText}
+                        </button>
+                      </NavLink>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* ⏺ CAROUSEL CONTROLS */}
-        <div className="absolute left-1 right-1 top-1/2 flex -translate-y-1/2 transform justify-between">
-          <a href="#next" className="btn btn-circle btn-outline border-2">
-            ❮
-          </a>
-          <a href="#next" className="btn btn-circle btn-outline border-2">
-            ❯
-          </a>
+          ))}
         </div>
       </div>
 
-      {/* ⏺ SLIDE 2 */}
-      <div className="carousel-item w-full relative" id="next">
-        <div className="hero mt-8 shadow-2xl rounded-xl p-4 border-2 border-slate-500">
-          <div className="hero-content flex-col lg:flex-row-reverse justify-between md:gap-10 gap-8">
-            <img
-              src={assets.hero_}
-              className="sm:max-w-md h-auto rounded-xl shadow-2xl border-2 border-primary"
-            />
-
-            <div>
-              <h2
-                className={`font-sofia text-4xl mb-4 ${styles.animate} font-bold`}
-              >
-                NEW ARRIVALS
-              </h2>
-
-              <p className="text-lg mb-8">
-                Discover the latest Mac essentials designed to boost your
-                productivity and style. Our new arrivals feature cutting-edge
-                technology with sleek designs, perfect for elevating your Mac
-                experience. Stay ahead with these must-have products, built to
-                seamlessly integrate into your Apple ecosystem
-              </p>
-
-              <NavLink to="/collection">
-                <button className="btn btn-outline btn-primary shadow-lg border-2 text-base border-indigo-500">
-                  EXPLORE NOW
-                </button>
-              </NavLink>
-            </div>
-          </div>
-
-          {/* ⏺ CAROUSEL CONTROLS */}
-          <div className="absolute left-1 right-1 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#prev" className="btn btn-circle btn-outline border-2">
-              ❮
-            </a>
-            <a href="#prev" className="btn btn-circle btn-outline border-2">
-              ❯
-            </a>
-          </div>
-        </div>
+      {/* Pagination Dots */}
+      <div className="absolute mt-4 lg:mt-[-30px] left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {slides.map((_, index) => (
+          <div
+            key={index}
+            className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${
+              currentSlide === index ? "bg-indigo-600" : "bg-gray-400"
+            }`}
+            onClick={() => handleDotClick(index)}
+          ></div>
+        ))}
       </div>
-    </div>
+    </>
   );
 }
 export default Hero;

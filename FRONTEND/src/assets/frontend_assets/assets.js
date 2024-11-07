@@ -6,6 +6,7 @@ import menu_icon from "./menu_icon.png";
 import dropdown_icon from "./dropdown_icon.png";
 import hero from "./hero.jpg";
 import hero_ from "./hero_.jpg";
+import hero__ from "./hero__.jpg";
 import exchange from "./exchange_icon.png";
 import quality from "./quality_icon.png";
 import support from "./support.png";
@@ -31,6 +32,7 @@ export const assets = {
   menu_icon,
   hero,
   hero_,
+  hero__,
   dropdown_icon,
   exchange,
   quality,
