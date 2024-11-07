@@ -12,10 +12,10 @@ function IndividualProduct() {
   const [color, setColor] = useState("");
 
   const colorToImageMapping = {
-    Silver: 0,
-    Space_Gray: 1,
-    Starlight: 2,
-    Midnight: 3,
+    Silver: 1,
+    Space_Gray: 2,
+    Starlight: 3,
+    Midnight: 4,
   };
 
   async function fetchProductData() {
@@ -23,7 +23,7 @@ function IndividualProduct() {
       if (item._id === productID) {
         setProductData(item);
         // console.log(item);
-        setImage(item.image[0]);
+        setImage(item.image[1]);
         return null;
       }
     });
@@ -50,7 +50,7 @@ function IndividualProduct() {
         {/* ⏺ PRODUCT IMAGE */}
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
           <div className="flex sm:flex-col justify-around sm:justify-normal sm:w-[18.7%] w-full opacity-70">
-            {productData.image.map((item, i) => (
+            {productData.image.slice(1).map((item, i) => (
               <img
                 src={item}
                 alt="product_image"
