@@ -49,7 +49,7 @@ function AllCollection({
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           >
-            «
+            <span className="mt-[-10px]">«</span>
           </button>
 
           {/* Current Page Display */}
@@ -62,7 +62,7 @@ function AllCollection({
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-            »
+            <span className="mt-[-10px]">»</span>
           </button>
         </div>
       </div>

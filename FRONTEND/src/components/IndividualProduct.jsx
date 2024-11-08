@@ -6,7 +6,7 @@ import RelatedProducts from "./RelatedProducts";
 function IndividualProduct() {
   const { productID } = useParams();
   // console.log(productID);
-  const { products, currency } = useContext(ShopContext);
+  const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [color, setColor] = useState("");
@@ -135,7 +135,7 @@ function IndividualProduct() {
               <div className="flex flex-col items-center">
                 <div
                   className={`w-8 h-8 bg-[#4B4B4B] ${
-                    color === "Space Gray"
+                    color === "Space_Gray"
                       ? "border-4 border-blue-600"
                       : "border-2 border-gray-500"
                   } rounded-full cursor-pointer shadow-xl`}
@@ -173,7 +173,10 @@ function IndividualProduct() {
             </div>
           </div>
 
-          <button className="btn btn-outline btn-success uppercase border-2 border-gray-500 text-base shadow-md">
+          <button
+            className="btn btn-outline btn-success uppercase border-2 shadow-md border-gray-500 text-base"
+            onClick={() => addToCart(productData._id, color)}
+          >
             Add To Cart
           </button>
         </div>
