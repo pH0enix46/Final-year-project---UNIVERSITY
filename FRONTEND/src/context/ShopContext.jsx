@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
+import { toast } from "react-toastify";
 
 export const ShopContext = createContext();
 
@@ -12,6 +13,19 @@ function ShopContextProvider({ children }) {
   const delivery_fee = 50;
 
   async function addToCart(itemID, color) {
+    // ⏺ GUARD CLAUSE
+    if (!color) {
+      toast.error("Select Product Color", {
+        style: {
+          backgroundColor: "#6666ffd8",
+          color: "#ddd",
+          fontWeight: "bold",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+        },
+      });
+      return;
+    }
+
     let cartData = structuredClone(cartItems); // ⏺ structuredClone() method/function ES22 creates a deep copy of an object, preserving nested objects and special types (like Dates, Maps, and Sets). It’s ideal for cloning complex data without altering the original
 
     if (cartData[itemID]) {
