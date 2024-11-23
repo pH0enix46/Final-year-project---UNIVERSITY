@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
 import { toast } from "react-toastify";
 
@@ -40,12 +40,24 @@ function ShopContextProvider({ children }) {
     setCartItems(cartData);
   }
 
-  useEffect(
-    function () {
-      console.log(cartItems);
-    },
-    [cartItems]
-  );
+  function getCartCount() {
+    let totalCount = 0;
+
+    for (const items in cartItems) {
+      for (const item in cartItems[items]) {
+        if (cartItems[items][item] > 0) totalCount += cartItems[items][item];
+      }
+    }
+
+    return totalCount;
+  }
+
+  // useEffect(
+  //   function () {
+  //     console.log(cartItems);
+  //   },
+  //   [cartItems]
+  // );
 
   const value = {
     products,
@@ -57,6 +69,7 @@ function ShopContextProvider({ children }) {
     setShowSearch,
     cartItems,
     addToCart,
+    getCartCount,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

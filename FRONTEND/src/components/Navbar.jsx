@@ -6,7 +6,7 @@ import { ShopContext } from "../context/ShopContext";
 
 function Navbar() {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
 
   function mainOptionVisible() {
     setVisible(true);
@@ -121,7 +121,7 @@ function Navbar() {
               className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5 cursor-pointer"
             />
             <p className="absolute right-[-8px] bottom-[-8px] w-6 h-6 text-[14px] text-center leading-5 bg-primary text-slate-300 aspect-square rounded-full border-2 border-gray-400">
-              4
+              {getCartCount()}
             </p>
           </div>
         </Link>
