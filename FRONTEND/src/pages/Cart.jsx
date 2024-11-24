@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
+import CartTotal from "../components/CartTotal";
 
 function Cart() {
   const { products, currency, cartItems, updatedQuantity } =
@@ -36,7 +37,7 @@ function Cart() {
   );
 
   return (
-    <div className="p-14">
+    <div className="py-14">
       <div className="text-3xl mb-3">
         <Title text1={"YOUR"} text2={"CART"} />
       </div>
@@ -65,8 +66,8 @@ function Cart() {
                   </h4>
                   <div className="flex items-center gap-2 sm:gap-5 mt-2 text-sm sm:text-lg">
                     <span>
-                      {currency}
                       {productData.price}
+                      {currency}
                     </span>
                     <span className="px-2 sm:px-3 py-1 border border-primary bg-secondary rounded-lg shadow-sm text-xs sm:text-sm">
                       {item.color}
@@ -81,10 +82,15 @@ function Cart() {
                   min={1}
                   defaultValue={item.quantity}
                   className="border border-secondary max-w-10 sm:max-w-14 px-1 py-1 bg-brand rounded-lg shadow-sm focus:outline-none focus:border-secondary"
+                  onChange={(e) =>
+                    e.target.value === "" || e.target.value === "0"
+                      ? null
+                      : updatedQuantity(item._id, item.color, +e.target.value)
+                  }
                 />
 
                 <div
-                  className="p-2 bg-primary rounded-full cursor-pointer shadow-md w-8 sm:w-12 flex justify-center"
+                  className="p-2 bg-primary rounded-full cursor-pointer shadow-md w-8 sm:w-10 flex justify-center"
                   onClick={() => updatedQuantity(item._id, item.color, 0)}
                 >
                   <img
@@ -97,6 +103,13 @@ function Cart() {
             </div>
           );
         })}
+      </div>
+
+      {/* ⏺ FOR TOTAL */}
+      <div className="flex justify-end my-20">
+        <div className="w-full sm:w-[450px]">
+          <CartTotal />
+        </div>
       </div>
     </div>
   );

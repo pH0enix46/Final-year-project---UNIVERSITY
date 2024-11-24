@@ -10,9 +10,9 @@ function ShopContextProvider({ children }) {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const currency = "৳";
-  const delivery_fee = 50;
+  const delivery_fee = 40;
 
-  async function addToCart(itemID, color) {
+  function addToCart(itemID, color) {
     // ⏺ GUARD CLAUSE
     if (!color) {
       toast.error("Select Product Color", {
@@ -59,10 +59,27 @@ function ShopContextProvider({ children }) {
   //   [cartItems]
   // );
 
-  async function updatedQuantity(itemID, color, quantity) {
+  function updatedQuantity(itemID, color, quantity) {
     let cartData = structuredClone(cartItems);
     cartData[itemID][color] = quantity;
     setCartItems(cartData);
+  }
+
+  function getCartAmount() {
+    let totalAmount = 0;
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items);
+      for (const item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0) {
+            totalAmount += itemInfo.price * cartItems[items][item];
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+    return totalAmount;
   }
 
   const value = {
@@ -77,6 +94,7 @@ function ShopContextProvider({ children }) {
     addToCart,
     getCartCount,
     updatedQuantity,
+    getCartAmount,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
