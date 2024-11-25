@@ -4,9 +4,13 @@ import styles from "./Login.module.css";
 function Login() {
   const [currentState, setCurrentState] = useState("Sign Up");
 
+  function onSubmitHandler(e) {
+    e.preventDefault();
+  }
+
   return (
-    <>
-      <form className="w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-400 px-4 py-8 border-t-primary border-t-2 rounded-lg shadow-lg flex flex-col items-center">
+    <form onSubmit={onSubmitHandler}>
+      <div className="w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-400 px-4 py-8 border-t-primary border-t-2 rounded-lg shadow-lg flex flex-col items-center">
         <div className="inline-flex items-center gap-2 mb-2 mt-4">
           <h2 className="text-3xl">{currentState}</h2>
           <hr className="border-none h-[2px] w-8 bg-gray-400" />
@@ -85,7 +89,9 @@ function Login() {
             </span>
           )}
         </div>
-      </form>
+      </div>
+
+      {/* ⏺ BUTTON */}
       <div className="flex justify-center mt-8">
         <button
           className={`btn border w-[90%] sm:max-w-96 bg-primary text-gray-400 hover:bg-brand hover:border-primary ${styles.animate} text-lg`}
@@ -93,7 +99,7 @@ function Login() {
           {currentState === "Login" ? "Sign In" : "Sign Up"}
         </button>
       </div>
-    </>
+    </form>
   );
 }
 export default Login;
