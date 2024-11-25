@@ -2,6 +2,7 @@
 import { createContext, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const ShopContext = createContext();
 
@@ -11,6 +12,7 @@ function ShopContextProvider({ children }) {
   const [cartItems, setCartItems] = useState({});
   const currency = "৳";
   const delivery_fee = 40;
+  const navigate = useNavigate();
 
   function addToCart(itemID, color) {
     // ⏺ GUARD CLAUSE
@@ -95,6 +97,7 @@ function ShopContextProvider({ children }) {
     getCartCount,
     updatedQuantity,
     getCartAmount,
+    navigate,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

@@ -5,7 +5,7 @@ import { assets } from "../assets/frontend_assets/assets";
 import CartTotal from "../components/CartTotal";
 
 function Cart() {
-  const { products, currency, cartItems, updatedQuantity } =
+  const { products, currency, cartItems, updatedQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
   const colorToImageMapping = {
@@ -106,9 +106,18 @@ function Cart() {
       </div>
 
       {/* ⏺ FOR TOTAL */}
-      <div className="flex justify-end my-20">
+      <div className="flex justify-end mt-20">
         <div className="w-full sm:w-[450px]">
           <CartTotal />
+
+          <div className="w-full text-end mt-4">
+            <button
+              className="btn btn-wide border-brand bg-primary lg:text-base hover:border-primary hover:bg-brand uppercase "
+              onClick={() => navigate("/place-order")}
+            >
+              Proceed to checkout
+            </button>
+          </div>
         </div>
       </div>
     </div>
