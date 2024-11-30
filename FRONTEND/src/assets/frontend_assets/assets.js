@@ -13,6 +13,7 @@ import support from "./support.png";
 import cross_icon from "./cross_icon.png";
 import bin_icon from "./bin_icon.png";
 import aboutUs_image from "./about-us_image.png";
+import contactUs_image from "./contact-us_image.webp";
 
 import mac_img01 from "./products/mac-1.webp";
 import mac_img02 from "./products/mac-2.webp";
@@ -42,6 +43,7 @@ export const assets = {
   cross_icon,
   bin_icon,
   aboutUs_image,
+  contactUs_image,
 };
 
 export const products = [

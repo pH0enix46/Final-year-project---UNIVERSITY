@@ -5,18 +5,18 @@ function About() {
   return (
     <div>
       <div className="pt-8">
-        <div className="text-3xl text-center">
-          <Title text1={"ABOUT"} text2={"US"} />
+        <div className="text-4xl text-center">
+          <Title text1={"About"} text2={"Us"} />
         </div>
 
-        <div className="my-10 flex flex-col md:flex-row gap-16">
+        <div className="my-10 flex flex-col lg:flex-row gap-8">
           <img
             src={assets.aboutUs_image}
             alt="about-us_image"
-            className="rounded-lg shadow-lg w-full md:max-w-[450px] object-cover"
+            className="rounded-lg shadow-lg w-full lg:max-w-[450px] object-cover"
           />
 
-          <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-400 text-lg">
+          <div className="flex flex-col justify-center gap-6 lg:w-2/4 text-gray-400 text-lg">
             <p>
               At{" "}
               <strong className="text-2xl italic border-b border-b-gray-400">
@@ -45,13 +45,13 @@ function About() {
       </div>
 
       <div>
-        <div className="text-2xl mt-20 ml-4">
+        <div className="text-3xl mt-20 ml-4">
           <Title text1={"WHY"} text2={"CHOOSE US"} />
         </div>
 
         <div className="text-lg flex flex-col">
           <div className="border-2 m-3 p-3 rounded-xl shadow-lg border-secondary">
-            <h3 className="text-2xl border-b-2 border-b-gray-400 inline-block mb-2">
+            <h3 className="text-2xl border-b-2 border-b-gray-500 inline-block mb-2 text-yellow-600">
               The Main Goal and Aim
             </h3>
             <p>
@@ -68,7 +68,7 @@ function About() {
           </div>
 
           <div className="border-2 m-3 p-3 rounded-xl shadow-lg border-secondary">
-            <h3 className="text-2xl border-b-2 border-b-gray-400 inline-block mb-2">
+            <h3 className="text-2xl border-b-2 border-b-gray-500 inline-block mb-2 text-yellow-600">
               Customer Satisfaction
             </h3>
             <p>
@@ -88,7 +88,7 @@ function About() {
           </div>
 
           <div className="border-2 m-3 p-3 rounded-xl shadow-lg border-secondary">
-            <h3 className="text-2xl border-b-2 border-b-gray-400 inline-block mb-2">
+            <h3 className="text-2xl border-b-2 border-b-gray-500 inline-block mb-2 text-yellow-600">
               The Brand That Cares For You
             </h3>
             <p>
@@ -106,7 +106,7 @@ function About() {
           </div>
 
           <div className="border-2 m-3 p-3 rounded-xl shadow-lg border-secondary">
-            <h3 className="text-2xl border-b-2 border-b-gray-400 inline-block mb-2">
+            <h3 className="text-2xl border-b-2 border-b-gray-500 inline-block mb-2 text-yellow-600">
               Dedicated Service Center
             </h3>
             <p>
