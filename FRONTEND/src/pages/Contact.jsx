@@ -1,4 +1,5 @@
 import Title from "../components/Title";
+import { IoLogoFacebook, IoLogoYoutube } from "react-icons/io";
 
 function Contact() {
   return (
@@ -41,6 +42,22 @@ function Contact() {
             <div>
               <h5 className="text-cyan-600 text-2xl">Email</h5>
               <span>meow@gmail.com</span>
+            </div>
+
+            <div className="flex gap-3 opacity-80">
+              <a href="https://www.facebook.com/MDJoy46/" target="_blank">
+                <div className="flex items-center justify-center w-12 h-12 bg-[rgba(24,118,242,0.8)] text-gray-300 rounded-full cursor-pointer shadow-inner">
+                  <IoLogoFacebook size={24} />
+                </div>
+              </a>
+              <a
+                href="https://www.youtube.com/@MDJOY0460/featured"
+                target="_blank"
+              >
+                <div className="flex items-center justify-center w-12 h-12 bg-[rgba(255,0,0,0.6)] text-gray-300 rounded-full cursor-pointer shadow-inner">
+                  <IoLogoYoutube size={24} />
+                </div>
+              </a>
             </div>
           </div>
 

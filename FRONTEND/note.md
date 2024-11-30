@@ -5,6 +5,7 @@
 - run `npm install -D tailwindcss postcss autoprefixer`
 - run `npx tailwindcss init -p`
 - run `npm i -D daisyui@latest`
+- run `npm install react-icons`
 
 ---
 
