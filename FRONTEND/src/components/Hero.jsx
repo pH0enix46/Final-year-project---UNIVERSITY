@@ -88,7 +88,7 @@ function Hero() {
                         {slide.description}
                       </p>
                       <NavLink to={slide.link}>
-                        <button className="btn btn-outline btn-primary border-2 text-base border-indigo-500 shadow-md">
+                        <button className="btn btn-outline btn-primary border-2 text-base border-indigo-500 shadow-md text-inherit">
                           {slide.buttonText}
                         </button>
                       </NavLink>
