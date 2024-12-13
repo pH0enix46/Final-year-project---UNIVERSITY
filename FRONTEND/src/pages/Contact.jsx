@@ -72,7 +72,7 @@ function Contact() {
 
             <form>
               <div className="flex flex-col lg:flex-row mt-8 gap-5 mb-4">
-                <label className="input input-bordered flex items-center gap-2 w-full">
+                <label className="input input-bordered flex items-center gap-2 w-full bg-gray-900">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -88,7 +88,7 @@ function Contact() {
                     required
                   />
                 </label>
-                <label className="input input-bordered flex items-center gap-2 w-full">
+                <label className="input input-bordered flex items-center gap-2 w-full bg-gray-900">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -108,13 +108,13 @@ function Contact() {
               </div>
 
               <textarea
-                className="textarea textarea-bordered w-full h-44 text-lg"
+                className="textarea textarea-bordered w-full h-44 text-lg bg-gray-900"
                 placeholder="Your message"
                 required
               ></textarea>
 
               {/* BUTTON */}
-              <button className="btn btn-active btn-neutral w-full mt-4 text-gray-400 text-lg">
+              <button className="btn btn-active btn-neutral w-full mt-4 text-gray-400 text-lg bg-gray-900">
                 Send Us
               </button>
             </form>

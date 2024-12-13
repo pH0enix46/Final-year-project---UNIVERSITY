@@ -53,7 +53,7 @@ function AllCollection({
           </button>
 
           {/* Current Page Display */}
-          <button className="bg-cyan-950 border-cyan-950 join-item btn hover:bg-sky-950 hover:border-sky-950">
+          <button className="bg-cyan-950 border-cyan-950 join-item btn hover:bg-sky-950 hover:border-sky-950 text-gray-400">
             Page {currentPage} of {totalPages}
           </button>
 

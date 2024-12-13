@@ -112,7 +112,7 @@ function Cart() {
 
           <div className="w-full text-end mt-4">
             <button
-              className="btn btn-wide border-brand bg-primary lg:text-base hover:border-primary hover:bg-brand uppercase "
+              className="btn btn-wide border-brand bg-primary lg:text-base hover:border-primary hover:bg-brand uppercase text-gray-400"
               onClick={() => navigate("/place-order")}
             >
               Proceed to checkout

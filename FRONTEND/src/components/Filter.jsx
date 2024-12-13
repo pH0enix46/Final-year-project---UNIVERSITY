@@ -39,7 +39,7 @@ function Filter({ toggleCategory, toggleSubCategory }) {
                   value={"M1"}
                   onChange={toggleCategory}
                 />
-                <span className="label-text">M1</span>
+                <span className="label-text text-gray-400">M1</span>
               </label>
             </div>
             <div className="form-control">
@@ -50,7 +50,7 @@ function Filter({ toggleCategory, toggleSubCategory }) {
                   value={"M2"}
                   onChange={toggleCategory}
                 />
-                <span className="label-text">M2</span>
+                <span className="label-text text-gray-400">M2</span>
               </label>
             </div>
             <div className="form-control">
@@ -61,7 +61,7 @@ function Filter({ toggleCategory, toggleSubCategory }) {
                   value={"M3"}
                   onChange={toggleCategory}
                 />
-                <span className="label-text">M3</span>
+                <span className="label-text text-gray-400">M3</span>
               </label>
             </div>
           </div>
@@ -85,7 +85,7 @@ function Filter({ toggleCategory, toggleSubCategory }) {
                   value={"Air"}
                   onChange={toggleSubCategory}
                 />
-                <span className="label-text">Air</span>
+                <span className="label-text text-gray-400">Air</span>
               </label>
             </div>
             <div className="form-control">
@@ -96,7 +96,7 @@ function Filter({ toggleCategory, toggleSubCategory }) {
                   value={"Pro"}
                   onChange={toggleSubCategory}
                 />
-                <span className="label-text">Pro</span>
+                <span className="label-text text-gray-400">Pro</span>
               </label>
             </div>
             <div className="form-control">
@@ -107,7 +107,7 @@ function Filter({ toggleCategory, toggleSubCategory }) {
                   value={"Max"}
                   onChange={toggleSubCategory}
                 />
-                <span className="label-text">Max</span>
+                <span className="label-text text-gray-400">Max</span>
               </label>
             </div>
           </div>

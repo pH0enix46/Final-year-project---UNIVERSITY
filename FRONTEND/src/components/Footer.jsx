@@ -56,7 +56,7 @@ function Footer() {
                 type="email"
                 required
               />
-              <button className="btn join-item rounded-r-full transition-all bg-slate-900 hover:bg-slate-950 text-base text-gray-400">
+              <button className="btn join-item rounded-r-full transition-all bg-slate-900 hover:bg-slate-950 text-base text-gray-400 border-gray-900">
                 Subscribe
               </button>
             </div>
