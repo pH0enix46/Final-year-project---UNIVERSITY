@@ -113,6 +113,7 @@ function Contact() {
                 required
               ></textarea>
 
+              {/* BUTTON */}
               <button className="btn btn-active btn-neutral w-full mt-4 text-gray-400 text-lg">
                 Send Us
               </button>

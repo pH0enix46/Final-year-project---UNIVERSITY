@@ -8,7 +8,7 @@ function ProductItem({ id, image, name, price }) {
 
   return (
     <Link to={`/product/${id}`} className="text-gray-400 cursor-pointer">
-      <div className="card bg-base-100 shadow-2xl rounded-lg overflow-hidden h-[300px] border-2 border-gray-600">
+      <div className="card bg-gray-900 shadow-2xl rounded-lg overflow-hidden h-[300px] border-2 border-gray-600">
         <figure className="relative w-full h-full md:h-44">
           <img
             src={image[0]}
