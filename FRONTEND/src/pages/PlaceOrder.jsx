@@ -1,4 +1,4 @@
 function PlaceOrder() {
-  return <div>placeorder</div>;
+  return <div className="flex flex-col"></div>;
 }
 export default PlaceOrder;
