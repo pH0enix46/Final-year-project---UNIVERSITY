@@ -1,10 +1,13 @@
 import Title from "./../components/Title";
 import CartTotal from "./../components/CartTotal";
 import { assets } from "../assets/frontend_assets/assets";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 function PlaceOrder() {
   const [method, setMethod] = useState("CashOnDelivery");
+
+  const { navigate } = useContext(ShopContext);
 
   return (
     <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] items-start">
@@ -87,7 +90,10 @@ function PlaceOrder() {
           </div>
 
           <div className="w-full text-end mt-8">
-            <button className="bg-transparent px-10 py-3 border-2 border-gray-500 rounded-lg font-semibold transition-all duration-300 ease-in-out hover:bg-gray-600 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50">
+            <button
+              onClick={() => navigate("/orders")}
+              className="bg-transparent px-10 py-3 border-2 border-gray-500 rounded-lg font-semibold transition-all duration-300 ease-in-out hover:bg-gray-600 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50"
+            >
               Place Order!
             </button>
           </div>
