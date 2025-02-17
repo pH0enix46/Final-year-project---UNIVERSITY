@@ -4,10 +4,11 @@
   "description": "our-backend logic",
   "license": "ISC",
   "author": "MD JOY",
-  "type": "commonjs",
+  "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
