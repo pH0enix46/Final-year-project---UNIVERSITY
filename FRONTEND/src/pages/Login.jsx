@@ -4,13 +4,13 @@ import styles from "./Login.module.css";
 function Login() {
   const [currentState, setCurrentState] = useState("Sign Up");
 
-  function onSubmitHandler(e) {
+  async function onSubmitHandler(e) {
     e.preventDefault();
   }
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <div className="w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-400 px-4 py-8 border-t-primary border-t-2 rounded-lg shadow-lg flex flex-col items-center">
+      <div className="w-[90%] sm:max-w-96 m-auto mt-14 gap-4 flex flex-col  text-gray-400 px-4 border-t-primary border-t-2 rounded-lg shadow-lg items-center py-8">
         <div className="inline-flex items-center gap-2 mb-2 mt-4">
           <h2 className="text-3xl">{currentState}</h2>
           <hr className="border-none h-[2px] w-8 bg-gray-400" />
