@@ -1,6 +1,6 @@
 // // //
-import userModel from "../models/userModel";
-import bcrypt from "bcrypt";
+import userModel from "../models/userModel.js";
+import bcrypt, { compare } from "bcrypt";
 import validator from "validator";
 import jwt from "jsonwebtoken";
 
@@ -8,7 +8,35 @@ function createToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET);
 }
 
-export async function loginUser(req, res) {}
+export async function loginUser(req, res) {
+  try {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User doesn't exist!",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      const token = createToken(user._id);
+      res.json({
+        success: true,
+        token,
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "Invalid password! Please recheck again!",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ success: false, message: error.message });
+  }
+}
 
 export async function registerUser(req, res) {
   try {
@@ -33,7 +61,7 @@ export async function registerUser(req, res) {
     if (password.length < 8) {
       return res.json({
         success: false,
-        message: "Please enter a strong password!",
+        message: "Please enter a strong and < 8 word password!",
       });
     }
 
