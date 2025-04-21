@@ -16,8 +16,18 @@ connectDB();
 connectCloudinary();
 
 // MIDDLEWARES ---------------//
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173", // ✅ allow frontend
+//     credentials: true, // ✅ allow cookies if needed
+//   })
+// );
+app.use(
+  cors({
+    origin: "*", // allow any origin TEMPORARILY for testing
+  })
+);
 app.use(express.json());
-app.use(cors());
 
 // API ENDPOINTS --------------//
 app.use("/api/user", useRouter);

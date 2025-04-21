@@ -1,16 +1,60 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "./Login.module.css";
+import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function Login() {
   const [currentState, setCurrentState] = useState("Sign Up");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
 
   async function onSubmitHandler(e) {
     e.preventDefault();
+    try {
+      if (currentState === "Sign Up") {
+        const res = await axios.post(backendUrl + "/api/user/register", {
+          name,
+          email,
+          password,
+        });
+
+        if (res.data.success) {
+          setToken(res.data.token);
+          localStorage.setItem("token", res.data.token);
+        } else {
+          toast.error(res.data.message);
+        }
+      } else {
+        const res = await axios.post(backendUrl + "/api/user/login", {
+          email,
+          password,
+        });
+
+        if (res.data.success) {
+          setToken(res.data.token);
+          localStorage.setItem("token", res.data.token);
+        } else {
+          toast.error(res.data.message);
+        }
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || err.message);
+    }
   }
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <div className="w-[90%] sm:max-w-96 m-auto mt-14 gap-4 flex flex-col  text-gray-400 px-4 border-t-primary border-t-2 rounded-lg shadow-lg items-center py-8">
+      <div className="w-[90%] sm:max-w-96 m-auto mt-14 gap-4 flex flex-col text-gray-400 px-4 border-t-primary border-t-2 rounded-lg shadow-lg items-center py-8">
         <div className="inline-flex items-center gap-2 mb-2 mt-4">
           <h2 className="text-3xl">{currentState}</h2>
           <hr className="border-none h-[2px] w-8 bg-gray-400" />
@@ -33,6 +77,8 @@ function Login() {
               className="grow"
               placeholder="Username"
               required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </label>
         )}
@@ -47,7 +93,14 @@ function Login() {
             <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
             <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
           </svg>
-          <input type="text" className="grow" placeholder="Email" required />
+          <input
+            type="email"
+            className="grow"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </label>
 
         <label className="input input-bordered flex items-center gap-2 w-full bg-brand">
@@ -68,6 +121,8 @@ function Login() {
             className="grow"
             placeholder="Password"
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
 
@@ -91,7 +146,6 @@ function Login() {
         </div>
       </div>
 
-      {/* ⏺ BUTTON */}
       <div className="flex justify-center mt-8">
         <button
           className={`btn border w-[90%] sm:max-w-96 bg-primary text-gray-400 hover:bg-brand hover:border-primary ${styles.animate} text-lg`}
@@ -102,4 +156,5 @@ function Login() {
     </form>
   );
 }
+
 export default Login;

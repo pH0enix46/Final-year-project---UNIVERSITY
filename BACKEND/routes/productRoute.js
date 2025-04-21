@@ -8,9 +8,9 @@ import {
 } from "../controllers/productController.js";
 import upload from "../middleware/multer.js";
 
-const pruductRouter = express.Router();
+const productRouter = express.Router();
 
-pruductRouter.post(
+productRouter.post(
   "/add",
   upload.fields([
     { name: "image1", maxCount: 1 },
@@ -20,8 +20,8 @@ pruductRouter.post(
   ]),
   addProduct
 );
-pruductRouter.post("/remove", removeProduct);
-pruductRouter.post("/singleProductInfo", singleProductInfo);
-pruductRouter.get("/list", listProduct);
+productRouter.post("/remove", removeProduct);
+productRouter.post("/singleProductInfo", singleProductInfo);
+productRouter.get("/list", listProduct);
 
-export default pruductRouter;
+export default productRouter;
