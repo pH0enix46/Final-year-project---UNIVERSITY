@@ -14,10 +14,11 @@ const Add = ({ token }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("Men");
-  const [subCategory, setSubCategoy] = useState("Topwear");
+  const [category, setCategory] = useState("M1");
+  const [subCategory, setSubCategoy] = useState("Air");
   const [bestseller, setBestseller] = useState(false);
-  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [colorInput, setColorInput] = useState("");
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ const Add = ({ token }) => {
       formData.append("category", category);
       formData.append("subCategory", subCategory);
       formData.append("bestseller", bestseller);
-      formData.append("sizes", JSON.stringify(sizes));
+      formData.append("colors", JSON.stringify(colors));
 
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
@@ -42,6 +43,7 @@ const Add = ({ token }) => {
         formData,
         { headers: { token } }
       );
+
       if (response.data.success) {
         toast.success(response.data.message);
         setName("");
@@ -51,6 +53,8 @@ const Add = ({ token }) => {
         setImage3(false);
         setImage4(false);
         setPrice("");
+        setColors([]);
+        setColorInput("");
       } else {
         toast.error(response.data.message);
       }
@@ -58,6 +62,18 @@ const Add = ({ token }) => {
       console.log(error);
       toast.error(error.message);
     }
+  };
+
+  const handleAddColor = () => {
+    const trimmed = colorInput.trim();
+    if (trimmed && !colors.includes(trimmed)) {
+      setColors((prev) => [...prev, trimmed]);
+    }
+    setColorInput("");
+  };
+
+  const handleRemoveColor = (color) => {
+    setColors((prev) => prev.filter((c) => c !== color));
   };
 
   return (
@@ -126,9 +142,9 @@ const Add = ({ token }) => {
               value={category}
               className="input-style"
             >
-              <option value="Men">Men</option>
-              <option value="Women">Women</option>
-              <option value="Kids">Kids</option>
+              <option value="M1">M1</option>
+              <option value="M2">M2</option>
+              <option value="M3">M3</option>
             </select>
           </div>
 
@@ -139,9 +155,9 @@ const Add = ({ token }) => {
               value={subCategory}
               className="input-style"
             >
-              <option value="Topwear">Topwear</option>
-              <option value="Bottomwear">Bottomwear</option>
-              <option value="Winterwear">Winterwear</option>
+              <option value="Air">Air</option>
+              <option value="Pro">Pro</option>
+              <option value="Max">Max</option>
             </select>
           </div>
 
@@ -158,29 +174,40 @@ const Add = ({ token }) => {
         </div>
       </div>
 
-      {/* Sizes */}
+      {/* Color Tags */}
       <div>
-        <p className="text-sm font-medium mb-2">Select Sizes</p>
-        <div className="flex gap-2 flex-wrap">
-          {["S", "M", "L", "XL", "XXL"].map((size) => (
+        <p className="text-sm font-medium mb-2">Product Colors</p>
+        <div className="flex gap-2 flex-wrap mb-2">
+          {colors.map((color, idx) => (
             <div
-              key={size}
-              onClick={() =>
-                setSizes((prev) =>
-                  prev.includes(size)
-                    ? prev.filter((item) => item !== size)
-                    : [...prev, size]
-                )
-              }
-              className={`px-4 py-1 rounded-full text-sm cursor-pointer transition ${
-                sizes.includes(size)
-                  ? "bg-black text-white"
-                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-              }`}
+              key={idx}
+              className="bg-gray-200 text-sm px-3 py-1 rounded-full flex items-center gap-2"
             >
-              {size}
+              {color}
+              <button
+                type="button"
+                onClick={() => handleRemoveColor(color)}
+                className="text-red-500 hover:text-red-700"
+              >
+                ×
+              </button>
             </div>
           ))}
+        </div>
+        <div className="flex gap-2">
+          <input
+            value={colorInput}
+            onChange={(e) => setColorInput(e.target.value)}
+            className="input-style"
+            placeholder="e.g. Red, Blue"
+          />
+          <button
+            type="button"
+            onClick={handleAddColor}
+            className="bg-black text-white px-4 rounded-md hover:bg-gray-900"
+          >
+            Add
+          </button>
         </div>
       </div>
 

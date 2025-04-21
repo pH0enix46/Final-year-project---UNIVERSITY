@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const List = () => {
   const [list, setList] = useState([]);
+  console.log(...list);
 
   const fetchList = async () => {
     try {
@@ -72,7 +73,7 @@ const List = () => {
           >
             <img
               className="w-14 h-14 object-cover rounded shadow-sm"
-              src={item.images?.[0] || "https://via.placeholder.com/50"}
+              src={item.image?.[0]}
               alt={item.name}
             />
             <p className="text-gray-800 font-medium">{item.name}</p>
