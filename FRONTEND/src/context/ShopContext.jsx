@@ -32,11 +32,17 @@ function ShopContextProvider({ children }) {
     }
 
     let cartData = structuredClone(cartItems);
-    if (cartData[itemID]) {
-      if (cartData[itemID][color]) cartData[itemID][color] += 1;
-      else cartData[itemID][color] = 1;
+    console.log(itemID);
+    // Ensure cartData is initialized as an object if it is undefined or null
+    cartData = cartData || {}; // If cartData is undefined or null, initialize it as an empty object
+
+    // Ensure that cartData[itemID] exists, if not initialize it
+    if (!cartData[itemID]) {
+      cartData[itemID] = {}; // Initialize cartData[itemID] if it doesn't exist
+    }
+    if (cartData[itemID][color]) {
+      cartData[itemID][color] += 1;
     } else {
-      cartData[itemID] = {};
       cartData[itemID][color] = 1;
     }
 

@@ -7,9 +7,10 @@ function IndividualProduct() {
   const { productID } = useParams();
   // console.log(productID);
   const { products, currency, addToCart } = useContext(ShopContext);
-  const [productData, setProductData] = useState(false);
+  const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
   const [color, setColor] = useState("");
+  console.log(productData);
 
   const colorToImageMapping = {
     Silver: 1,
@@ -39,8 +40,16 @@ function IndividualProduct() {
 
   const handleColorChange = (colorName) => {
     setColor(colorName);
+
     const imageIndex = colorToImageMapping[colorName];
-    setImage(productData.image[imageIndex]);
+
+    // Ensure that the imageIndex is valid and within bounds
+    if (imageIndex && productData.image[imageIndex]) {
+      setImage(productData.image[imageIndex]);
+    } else {
+      // Fallback to the default image if the index is invalid
+      setImage(productData.image[0]);
+    }
   };
 
   return productData ? (
@@ -175,7 +184,7 @@ function IndividualProduct() {
 
           <button
             className="btn btn-outline btn-success uppercase border-2 shadow-md border-gray-500 text-base"
-            onClick={() => addToCart(productData._id, color)}
+            onClick={() => addToCart(+productData._id, color)}
           >
             Add To Cart
           </button>
