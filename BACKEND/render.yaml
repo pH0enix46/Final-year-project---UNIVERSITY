@@ -1,0 +1,15 @@
+services:
+  - name: backend
+    type: web
+    runtime: node
+    plan: free # Change to 'starter' or higher for better performance
+    region: oregon # Change based on your location (e.g., frankfurt)
+    buildCommand: npm install
+    startCommand: npm start # Update if using a different start script
+    envVars:
+      - key: NODE_VERSION
+        value: 18 # Update according to your Node.js version
+      - key: PORT
+        value: 4000 # Change if your app listens on a different port
+      - fromGroup: backend-env # Load additional environment variables from a group
+    autoDeploy: true # Set to false if you want manual deployments only

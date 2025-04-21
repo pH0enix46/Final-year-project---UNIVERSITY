@@ -1,4 +1,4 @@
-import orderModel from "../models/orderModal";
+import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 
 const placeOrder = async (req, res) => {
@@ -63,11 +63,4 @@ const updateStatus = async (req, res) => {
   }
 };
 
-export {
-  placeOrder,
-  placeOrderRazorpay,
-  placeOrderStripe,
-  allOrders,
-  updateStatus,
-  userOrders,
-};
+export { placeOrder, placeOrderStripe, allOrders, updateStatus, userOrders };
