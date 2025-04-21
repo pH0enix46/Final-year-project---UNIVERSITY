@@ -1,12 +1,18 @@
 import { assets } from "../assets/frontend_assets/assets";
 import { Link, NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
 import { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 
 function Navbar() {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  const {
+    setShowSearch,
+    getCartCount,
+    navigate,
+    token,
+    setToken,
+    setCartItems,
+  } = useContext(ShopContext);
 
   function mainOptionVisible() {
     setVisible(true);
@@ -16,12 +22,19 @@ function Navbar() {
     setVisible(false);
   }
 
+  const logout = () => {
+    navigate("/login");
+    localStorage.removeItem("token");
+    setToken("");
+    setCartItems([]);
+  };
+
   return (
     <div className="flex items-center justify-between font-medium p-4 rounded-xl border-secondary shadow-lg">
       {/* ⏺ LOGO */}
       <Link to="/">
         <div
-          className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full ${styles.glow}`}
+          className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full`}
         >
           <img
             src={assets.logo}
@@ -75,20 +88,19 @@ function Navbar() {
 
       {/* ⏺ OTHERS OPTION */}
       <div className="flex items-center lg:gap-6 md:gap-4 gap-3">
-        <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400">
+        <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400 cursor-pointer">
           <NavLink to="/collection">
             <img
               src={assets.serach_icon}
               alt="search_icon"
               className="w-4 h-4 sm:w-3 sm:h-3 md:w-5 md:h-5 cursor-pointer"
-              // onClick={() => setShowSearch((prev) => !prev)}
               onClick={() => setShowSearch(true)}
             />
           </NavLink>
         </div>
 
         <div className="dropdown dropdown-end">
-          <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400">
+          <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400 cursor-pointer">
             <Link to={"/login"}>
               <img
                 src={assets.profile_icon}
@@ -103,20 +115,28 @@ function Navbar() {
             tabIndex={0}
             className="dropdown-content menu bg-teal-950 z-[1] w-44 p-2 mt-2 rounded-xl border-4 border-teal-800 shadow-xl"
           >
-            <li>
-              <a>My Profile</a>
-            </li>
-            <li>
-              <a>Orders</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
+            {token ? (
+              <>
+                <li>
+                  <a>My Profile</a>
+                </li>
+                <li>
+                  <a onClick={() => navigate("/orders")}>Orders</a>
+                </li>
+                <li>
+                  <a onClick={logout}>Logout</a>
+                </li>
+              </>
+            ) : (
+              <li>
+                <a onClick={() => navigate("/login")}>Login</a>
+              </li>
+            )}
           </ul>
         </div>
 
         <Link to="/cart" className="relative">
-          <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400">
+          <div className="p-2 rounded-full bg-gray-300 bg-opacity-30 backdrop-blur-md flex items-center justify-center shadow-lg border-4 border-gray-400 cursor-pointer">
             <img
               src={assets.cart_icon}
               alt="cart_icon"
@@ -203,4 +223,5 @@ function Navbar() {
     </div>
   );
 }
+
 export default Navbar;

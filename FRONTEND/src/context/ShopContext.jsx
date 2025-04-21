@@ -10,7 +10,8 @@ export const ShopContext = createContext();
 function ShopContextProvider({ children }) {
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
-  const [cartItems, setCartItems] = useState({});
+  // const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState([]);
   const [productss, setProducts] = useState([]);
   const [token, setToken] = useState("");
   const currency = "৳";
@@ -91,14 +92,23 @@ function ShopContextProvider({ children }) {
 
   function getCartAmount() {
     let totalAmount = 0;
-    for (const items in cartItems) {
-      const itemInfo = productss.find((product) => product._id === items);
-      for (const color in cartItems[items]) {
-        if (cartItems[items][color] > 0) {
-          totalAmount += itemInfo?.price * cartItems[items][color];
+
+    // Check if productss is a valid array before proceeding
+    if (Array.isArray(productss) && productss.length > 0) {
+      for (const items in cartItems) {
+        const itemInfo = productss.find((product) => product._id === items);
+
+        // Ensure itemInfo exists before trying to access its properties
+        if (itemInfo) {
+          for (const color in cartItems[items]) {
+            if (cartItems[items][color] > 0) {
+              totalAmount += itemInfo.price * cartItems[items][color];
+            }
+          }
         }
       }
     }
+
     return totalAmount;
   }
 
@@ -159,6 +169,7 @@ function ShopContextProvider({ children }) {
     setToken,
     setProducts,
     products,
+    setCartItems,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
