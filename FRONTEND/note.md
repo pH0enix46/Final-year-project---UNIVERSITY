@@ -6,6 +6,7 @@
 - run `npx tailwindcss init -p`
 - run `npm i -D daisyui@latest`
 - run `npm install react-icons`
+- run `npm install axios`
 
 ---
 
