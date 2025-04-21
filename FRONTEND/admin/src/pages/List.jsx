@@ -1,49 +1,43 @@
-import axios from 'axios'
-import React from 'react'
-import { backendUrl, currency } from '../App'
-import { toast } from 'react-toastify'
-import { useState, useEffect } from 'react'
+import axios from "axios";
+import { backendUrl, currency } from "../App";
+import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
 
 const List = () => {
-  const [list, setList] = useState([])
-  const fetchList = async()=>{
-    try{
-      const response = await axios.get(backendUrl + 'api/product/list')
-      if(response.data.success){
-        setList(response.data.products)
-      }
-      else{
-        toast.error(response.data.message)
-      }
-    }
-    catch (error){
-      console.error(error)
-      toast.error(error.message)
-    }
-  }
+  const [list, setList] = useState([]);
 
-  useEffect(()=>{
-    fetchList()
-  }, [])
+  const fetchList = async () => {
+    try {
+      const response = await axios.get(backendUrl + "api/product/list");
+      if (response.data.success) {
+        setList(response.data.products);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  };
 
-  console.log("Fetched Products:", list) 
+  useEffect(() => {
+    fetchList();
+  }, []);
 
   const removeProduct = async (id) => {
     try {
-      const token = localStorage.getItem('token');  // ✅ Fetch token
+      const token = localStorage.getItem("token");
       if (!token) {
-        toast.error('Authentication token not found');
+        toast.error("Authentication token not found");
         return;
       }
-  
+
       const response = await axios.post(
-        backendUrl + 'api/product/remove',
+        backendUrl + "api/product/remove",
         { id },
-        { headers: { token } }  // ✅ Pass token properly
+        { headers: { token } }
       );
 
-
-  
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchList();
@@ -55,37 +49,49 @@ const List = () => {
       toast.error(error.response?.data?.message || error.message);
     }
   };
-  
-  
 
   return (
-    <>
-      <p className='mb-2'>All Products List</p>
-      <div className='flex flex-col gap-2'>
-        {/*List Table Title */}
-        <div className='hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm'>
-          <b>Image</b>
-          <b>Name</b>
-          <b>Category</b>
-          <b>Price</b>
-          <b className='text-center'>Action</b>
-        </div>
+    <div className="w-full mt-4">
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        All Products List
+      </h2>
 
-        {/* Product List */}
-        {
-          list.map((item, index) => (
-            <div className='grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm' key={index}>
-              <img className='w-12' src={item.images?.[0] || 'default-image-url'} alt={item.name} />
-              <p>{item.name}</p>
-              <p>{item.category}</p>
-              <p>{currency}{item.price}</p>
-              <p onClick={()=> removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
-            </div>
-          ))
-        }
+      <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] bg-gray-50 text-gray-600 text-sm font-medium border-y rounded-t-md px-4 py-3">
+        <span>Image</span>
+        <span>Name</span>
+        <span>Category</span>
+        <span>Price</span>
+        <span className="text-center">Action</span>
       </div>
-    </>
-  )
-}
+
+      <div className="flex flex-col">
+        {list.map((item, index) => (
+          <div
+            key={index}
+            className="grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center border-b px-4 py-3 text-sm hover:bg-gray-50 transition duration-200"
+          >
+            <img
+              className="w-14 h-14 object-cover rounded shadow-sm"
+              src={item.images?.[0] || "https://via.placeholder.com/50"}
+              alt={item.name}
+            />
+            <p className="text-gray-800 font-medium">{item.name}</p>
+            <p className="text-gray-500">{item.category}</p>
+            <p className="text-gray-700 font-semibold">
+              {currency}
+              {item.price}
+            </p>
+            <button
+              onClick={() => removeProduct(item._id)}
+              className="text-red-500 font-bold hover:text-red-700 transition text-right md:text-center"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default List;

@@ -1,26 +1,46 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import {assets} from '../assets/assets'
+import { NavLink } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Sidebar = () => {
-  return (
-    <div className='w-[18%] min-h-screen border-r-2'>
-      <div className='flex flex-col gap-4 pt-6 pl-[20%] text-[15px]'>
-          <NavLink className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-l' to='/add'>
-              <img className='w-5 h-5' src={assets.add_icon} alt="" />
-              <p className='md:block text-gray-800'>Add Items</p>
-          </NavLink>
-          <NavLink className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-l' to='/list'>
-              <img className='w-5 h-5' src={assets.order_icon} alt="" />
-              <p className='md:block'>List Items</p>
-          </NavLink>
-          <NavLink className='flex items-center gap-3 border border-gray-300 border-r-0 px-3 py-2 rounded-l' to='/order'>
-              <img className='w-5 h-5' src={assets.order_icon} alt="" />
-              <p className='md:block'>Order Items</p>
-          </NavLink>
-      </div>
-    </div>
-  )
-}
+  const linkStyle =
+    "flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:scale-[1.02]";
+  const activeStyle = "bg-black text-white hover:bg-black";
 
-export default Sidebar
+  return (
+    <aside className="w-[18%] min-h-screen border-r border-gray-200 bg-white shadow-sm">
+      <div className="flex flex-col gap-3 pt-8 px-6 text-[15px] font-medium">
+        <NavLink
+          to="/add"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : ""}`
+          }
+        >
+          <img className="w-5 h-5" src={assets.add_icon} alt="Add" />
+          <span>Add Items</span>
+        </NavLink>
+
+        <NavLink
+          to="/list"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : ""}`
+          }
+        >
+          <img className="w-5 h-5" src={assets.order_icon} alt="List" />
+          <span>List Items</span>
+        </NavLink>
+
+        <NavLink
+          to="/order"
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : ""}`
+          }
+        >
+          <img className="w-5 h-5" src={assets.order_icon} alt="Order" />
+          <span>Order Items</span>
+        </NavLink>
+      </div>
+    </aside>
+  );
+};
+
+export default Sidebar;

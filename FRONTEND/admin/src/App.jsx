@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import Sidebar from "./components/Sidebar";
 import { Routes, Route } from "react-router-dom";

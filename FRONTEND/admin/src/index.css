@@ -1,20 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 * {
-  font-family: 'Outfit';
+  font-family: "Outfit";
 }
 
-select, input, textarea{
+select,
+input,
+textarea {
   border: 1px solid #c2c2c2;
   outline-color: #c586a5;
   border-radius: 4px;
 }
 .active {
   background-color: #ffebf5;
-  border-color: #C586A5;
+  border-color: #c586a5;
+}
+
+/* in your styles/globals.css or tailwind config */
+.input-style {
+  @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black;
 }
