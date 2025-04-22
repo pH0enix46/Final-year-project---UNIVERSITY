@@ -1,1 +1,3 @@
-_This project is licensed under the MIT License - see the LICENSE file for details_
+# 🛠️ Originally developed by [pH0enix46](https://github.com/pH0enix46)
+
+## Please respect the license and give proper credit
