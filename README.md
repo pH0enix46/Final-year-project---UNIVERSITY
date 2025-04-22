@@ -1,5 +1,5 @@
-# Readme will be updated soon!
+---
 
-- right now just watch the processing
-- run `npm i`
-- run `npm run dev`
+© 2025 by pH0enix46. All rights reserved
+
+Unauthorized copying, modification, distribution, or use of this code or any part of this project without express permission is strictly prohibited
