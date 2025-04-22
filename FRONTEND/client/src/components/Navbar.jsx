@@ -2,6 +2,7 @@ import { assets } from "../assets/frontend_assets/assets";
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
+import styles from "./Navbar.module.css";
 
 function Navbar() {
   const [visible, setVisible] = useState(false);
@@ -34,7 +35,7 @@ function Navbar() {
       {/* ⏺ LOGO */}
       <Link to="/">
         <div
-          className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full`}
+          className={`relative p-1 transition-all duration-[.3s] border-4 border-transparent hover:border-gray-400 hover:shadow-lg hover:animate-pulse rounded-full ${styles.glow}`}
         >
           <img
             src={assets.logo}

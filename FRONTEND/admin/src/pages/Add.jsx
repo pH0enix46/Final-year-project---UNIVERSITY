@@ -79,7 +79,7 @@ const Add = ({ token }) => {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className="w-full max-w-3xl mx-auto bg-white shadow-md rounded-2xl p-6 sm:p-8 flex flex-col gap-6"
+      className="w-full max-w-3xl mx-auto bg-primary rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow shadow-gray-400"
     >
       {/* Image Upload */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -112,11 +112,11 @@ const Add = ({ token }) => {
       {/* Inputs */}
       <div className="space-y-4">
         <div>
-          <p className="text-sm font-medium mb-1">Product Name</p>
+          <p className="text-md font-medium mb-1 text-gray-300">Product Name</p>
           <input
             onChange={(e) => setName(e.target.value)}
             value={name}
-            className="input-style"
+            className="input-style bg-secondary"
             type="text"
             placeholder="e.g. Polo T-shirt"
             required
@@ -124,11 +124,13 @@ const Add = ({ token }) => {
         </div>
 
         <div>
-          <p className="text-sm font-medium mb-1">Product Description</p>
+          <p className="text-md font-medium mb-1 text-gray-300">
+            Product Description
+          </p>
           <textarea
             onChange={(e) => setDescription(e.target.value)}
             value={description}
-            className="input-style h-24 resize-none"
+            className="input-style h-24 resize-none bg-secondary"
             placeholder="Describe the product..."
             required
           />
@@ -136,11 +138,11 @@ const Add = ({ token }) => {
 
         <div className="grid sm:grid-cols-3 gap-4">
           <div>
-            <p className="text-sm font-medium mb-1">Category</p>
+            <p className="text-md font-medium mb-1 text-gray-300">Category</p>
             <select
               onChange={(e) => setCategory(e.target.value)}
               value={category}
-              className="input-style"
+              className="input-style bg-secondary text-gray-300"
             >
               <option value="M1">M1</option>
               <option value="M2">M2</option>
@@ -149,11 +151,13 @@ const Add = ({ token }) => {
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-1">Sub Category</p>
+            <p className="text-md font-medium mb-1 text-gray-300">
+              Sub Category
+            </p>
             <select
               onChange={(e) => setSubCategoy(e.target.value)}
               value={subCategory}
-              className="input-style"
+              className="input-style bg-secondary text-gray-300"
             >
               <option value="Air">Air</option>
               <option value="Pro">Pro</option>
@@ -162,11 +166,11 @@ const Add = ({ token }) => {
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-1">Price ($)</p>
+            <p className="text-md font-medium mb-1 text-gray-300">Price ($)</p>
             <input
               onChange={(e) => setPrice(e.target.value)}
               value={price}
-              className="input-style"
+              className="input-style bg-secondary"
               type="number"
               placeholder="25"
             />
@@ -176,7 +180,7 @@ const Add = ({ token }) => {
 
       {/* Color Tags */}
       <div>
-        <p className="text-sm font-medium mb-2">Product Colors</p>
+        <p className="text-md font-medium mb-1 text-gray-300">Product Colors</p>
         <div className="flex gap-2 flex-wrap mb-2">
           {colors.map((color, idx) => (
             <div
@@ -198,13 +202,13 @@ const Add = ({ token }) => {
           <input
             value={colorInput}
             onChange={(e) => setColorInput(e.target.value)}
-            className="input-style"
-            placeholder="e.g. Red, Blue"
+            className="input-style bg-secondary"
+            placeholder="Silver, Space Gray, Starlight, Midnight"
           />
           <button
             type="button"
             onClick={handleAddColor}
-            className="bg-black text-white px-4 rounded-md hover:bg-gray-900"
+            className="bg-brand text-white px-4 rounded-md hover:bg-primary border-2 border-gray-400"
           >
             Add
           </button>
@@ -220,7 +224,10 @@ const Add = ({ token }) => {
           id="bestseller"
           className="w-4 h-4"
         />
-        <label htmlFor="bestseller" className="text-sm cursor-pointer">
+        <label
+          htmlFor="bestseller"
+          className="text-md font-medium mb-1 text-gray-300 cursor-pointer"
+        >
           Mark as Bestseller
         </label>
       </div>
@@ -228,7 +235,7 @@ const Add = ({ token }) => {
       {/* Submit Button */}
       <button
         type="submit"
-        className="mt-4 bg-black text-white py-2 px-6 rounded-lg hover:bg-gray-900 transition"
+        className="mt-4 bg-brand text-white py-2 px-6 rounded-lg hover:bg-primary transition border-2 border-gray-400"
       >
         Add Product
       </button>

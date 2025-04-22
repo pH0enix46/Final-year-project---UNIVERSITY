@@ -1,11 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-* {
-  font-family: "Outfit";
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Optional: if Tailwind still applies ring-black somewhere, block it here */
+*:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+html {
+  font-family: "Itim";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
 }
 
 select,

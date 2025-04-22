@@ -25,14 +25,14 @@ const App = () => {
   }, [token]);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-brand min-h-screen">
       <ToastContainer />
       {token === "" ? (
         <Login setToken={setToken} />
       ) : (
         <>
           <NavBar setToken={setToken} />
-          <hr />
+
           <div className="flex w-full">
             <Sidebar />
             <div className="flex-1 mx-8 my-8 text-gray-700 text-base">

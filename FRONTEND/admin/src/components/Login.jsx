@@ -17,6 +17,8 @@ const Login = ({ setToken }) => {
       });
       if (response.data.success) {
         setToken(response.data.token);
+        // console.log("Login response:", response.data);
+        toast.success("You are successfully login!");
       } else {
         toast.error(response.data.message);
       }
@@ -27,14 +29,14 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-brand px-4">
+      <div className="bg-primary w-full max-w-md p-8 rounded-2xl shadow-xl border-2 border-secondary">
+        <h1 className="text-3xl font-bold text-gray-300 mb-6 text-center">
           Admin Panel
         </h1>
         <form onSubmit={onSubmitHandler} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-md font-medium text-gray-200 mb-1">
               Email Address
             </label>
             <input
@@ -47,7 +49,7 @@ const Login = ({ setToken }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-md font-medium text-gray-200 mb-1">
               Password
             </label>
             <input
@@ -59,9 +61,10 @@ const Login = ({ setToken }) => {
               placeholder="••••••••"
             />
           </div>
+
           <button
             type="submit"
-            className="w-full py-2.5 text-white bg-black rounded-lg font-medium hover:bg-gray-800 transition"
+            className="w-full py-2.5 text-gray-200 bg-brand rounded-lg font-medium hover:bg-primary transition border border-gray-500"
           >
             Login
           </button>
