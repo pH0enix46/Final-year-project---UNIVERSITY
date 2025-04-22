@@ -5,6 +5,10 @@ import Title from "./Title";
 function CartTotal() {
   const { currency, delivery_fee, getCartAmount } = useContext(ShopContext);
 
+  // const cartTotal = getCartAmount(); // ✅ proper function call
+
+  // console.log(cartTotal);
+
   return (
     <div className="w-full">
       <div className="text-2xl pl-4">
@@ -31,7 +35,7 @@ function CartTotal() {
             <strong>Total</strong>
           </span>
           <span>
-            {getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee}
+            {getCartAmount === 0 ? 0 : getCartAmount() + delivery_fee}
             {currency}
           </span>
         </div>

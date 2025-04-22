@@ -12,7 +12,7 @@ function ShopContextProvider({ children }) {
   const [showSearch, setShowSearch] = useState(false);
   // const [cartItems, setCartItems] = useState({});
   const [cartItems, setCartItems] = useState([]);
-  const [productss, setProducts] = useState([]);
+  const [productData, setProductData] = useState([]);
   const [token, setToken] = useState("");
   const currency = "৳";
   const delivery_fee = 40;
@@ -92,23 +92,18 @@ function ShopContextProvider({ children }) {
 
   function getCartAmount() {
     let totalAmount = 0;
-
-    // Check if productss is a valid array before proceeding
-    if (Array.isArray(productss) && productss.length > 0) {
-      for (const items in cartItems) {
-        const itemInfo = productss.find((product) => product._id === items);
-
-        // Ensure itemInfo exists before trying to access its properties
-        if (itemInfo) {
-          for (const color in cartItems[items]) {
-            if (cartItems[items][color] > 0) {
-              totalAmount += itemInfo.price * cartItems[items][color];
-            }
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items);
+      for (const item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0) {
+            totalAmount += itemInfo.price * cartItems[items][item];
           }
+        } catch (error) {
+          console.error(error);
         }
       }
     }
-
     return totalAmount;
   }
 
@@ -116,7 +111,7 @@ function ShopContextProvider({ children }) {
     try {
       const res = await axios.get(`${backendUrl}/api/product/list`);
       if (res.data.success) {
-        setProducts(res.data.productss);
+        setProductData(res.data.productss);
       }
     } catch (err) {
       toast.error(err.message);
@@ -151,7 +146,7 @@ function ShopContextProvider({ children }) {
   }, [token]);
 
   const value = {
-    productss,
+    productData,
     currency,
     delivery_fee,
     search,
@@ -167,7 +162,7 @@ function ShopContextProvider({ children }) {
     backendUrl,
     token,
     setToken,
-    setProducts,
+    setProductData,
     products,
     setCartItems,
   };
