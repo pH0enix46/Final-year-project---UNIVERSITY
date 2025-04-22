@@ -56,7 +56,7 @@ const Orders = ({ token }) => {
         {orders.map((order, index) => (
           <div
             key={index}
-            className="grid grid-cols-1 sm:grid-cols-[0.4fr_2fr_1fr] lg:grid-cols-[0.4fr_2fr_1fr_1fr_1fr] gap-4 items-start border rounded-xl shadow-sm p-5 bg-white"
+            className="grid grid-cols-1 sm:grid-cols-[0.4fr_2fr_1fr] lg:grid-cols-[0.4fr_2fr_1fr_1fr_1fr] gap-4 items-start border rounded-xl p-5 bg-primary border-none shadow shadow-gray-400 text-gray-300!"
           >
             <img
               className="w-14 h-14 object-contain"
@@ -65,7 +65,7 @@ const Orders = ({ token }) => {
             />
 
             {/* Order Details */}
-            <div className="text-gray-700 text-sm space-y-1">
+            <div className="text-gray-300 text-md space-y-1">
               <div>
                 {order.items.map((item, idx) => (
                   <p key={idx}>
@@ -78,19 +78,17 @@ const Orders = ({ token }) => {
                 {order.address.firstName} {order.address.lastName}
               </p>
               <div className="text-xs">
-                <p>{order.address.street},</p>
                 <p>
-                  {order.address.city}, {order.address.state},{" "}
-                  {order.address.country}, {order.address.zipcode}
+                  {order.address.city}, {order.address.country}
                 </p>
               </div>
-              <p className="text-xs font-medium pt-1">
-                📞 {order.address.phone}
+              <p className="text-lg font-medium pt-1">
+                📳 {order.address.phone}
               </p>
             </div>
 
             {/* Meta Info */}
-            <div className="text-sm text-gray-600 space-y-1">
+            <div className="text-sm text-gray-300 space-y-1">
               <p className="text-base font-semibold">
                 Items: {order.items.length}
               </p>
@@ -100,7 +98,7 @@ const Orders = ({ token }) => {
             </div>
 
             {/* Total */}
-            <div className="text-base font-bold text-green-700 flex items-center">
+            <div className="text-base font-bold text-green-500 flex items-center">
               {currency}
               {order.amount}
             </div>
@@ -109,7 +107,7 @@ const Orders = ({ token }) => {
             <select
               onChange={(event) => statusHandler(event, order._id)}
               value={order.status}
-              className="p-2 rounded-md border bg-gray-50 font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="p-2 rounded-md border bg-secondary font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <option value="Order Placed">Order Placed</option>
               <option value="Packing">Packing</option>

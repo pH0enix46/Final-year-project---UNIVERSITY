@@ -8,6 +8,7 @@ function Cart() {
   const { products, currency, cartItems, updatedQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
+  // console.log(cartData);
   const colorToImageMapping = {
     Silver: 1,
     Space_Gray: 2,
