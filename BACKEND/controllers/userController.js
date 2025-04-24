@@ -58,6 +58,7 @@ export async function registerUser(req, res) {
         message: "Please enter a valid email!",
       });
     }
+
     if (password.length < 8) {
       return res.json({
         success: false,
