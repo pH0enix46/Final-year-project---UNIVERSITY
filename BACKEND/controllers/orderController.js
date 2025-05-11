@@ -1,5 +1,8 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const placeOrder = async (req, res) => {
   try {
@@ -26,7 +29,35 @@ const placeOrder = async (req, res) => {
 };
 
 // Placing orders using stripe method
-const placeOrderStripe = async (req, res) => {};
+const placeOrderStripe = async (req, res) => {
+  try {
+    const { userId, items, amount, address } = req.body;
+    const orderData = {
+      userId,
+      items,
+      amount,
+      address,
+      paymentMethod: "Stripe",
+      payment: true,
+      date: Date.now(),
+    };
+    const newOrder = new orderModel(orderData);
+    await newOrder.save();
+
+    await userModel.findByIdAndUpdate(userId, { cartData: {} });
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: "usd",
+      payment_method_types: ["card"],
+    });
+
+    res.json({ success: true, message: "Order Placed", paymentIntent });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // All orders data for admin panel
 const allOrders = async (req, res) => {
