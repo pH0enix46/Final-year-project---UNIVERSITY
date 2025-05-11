@@ -77,6 +77,21 @@ function PlaceOrder() {
           }
           break;
         }
+
+        case "Stripe": {
+          const response = await axios.post(
+            `${backendUrl}/api/order/stripe`,
+            orderData,
+            { headers: { token } }
+          );
+          if (response.data.success) {
+            window.location.href = response.data.session_url;
+          } else {
+            toast.error(response.data.message);
+          }
+          break;
+        }
+
         default:
           break;
       }
