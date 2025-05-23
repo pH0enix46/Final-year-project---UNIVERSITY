@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import styles from "./Login.module.css";
 import { ShopContext } from "../context/ShopContext";
+import { LoadingContext } from "../App";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -11,9 +12,11 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+  const { setIsLoading } = useContext(LoadingContext);
 
   async function onSubmitHandler(e) {
     e.preventDefault();
+    setIsLoading(true);
     try {
       if (currentState === "Sign Up") {
         const res = await axios.post(backendUrl + "/api/user/register", {
@@ -25,8 +28,13 @@ function Login() {
         if (res.data.success) {
           setToken(res.data.token);
           localStorage.setItem("token", res.data.token);
+          // Store user information in localStorage
+          localStorage.setItem("userName", name);
+          localStorage.setItem("userEmail", email);
+          // The loading state will be turned off by the useEffect when token changes
         } else {
           toast.error(res.data.message);
+          setIsLoading(false);
         }
       } else {
         const res = await axios.post(backendUrl + "/api/user/login", {
@@ -37,20 +45,27 @@ function Login() {
         if (res.data.success) {
           setToken(res.data.token);
           localStorage.setItem("token", res.data.token);
+          // Store user email in localStorage
+          localStorage.setItem("userEmail", email);
+          // The loading state will be turned off by the useEffect when token changes
         } else {
           toast.error(res.data.message);
+          setIsLoading(false);
         }
       }
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);
+      setIsLoading(false);
     }
   }
 
   useEffect(() => {
     if (token) {
+      // Turn off loading state when token changes (after successful login/registration)
+      setIsLoading(false);
       navigate("/");
     }
-  }, [token, navigate]);
+  }, [token, navigate, setIsLoading]);
 
   return (
     <form onSubmit={onSubmitHandler}>
