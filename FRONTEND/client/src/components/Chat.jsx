@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { io } from "socket.io-client";
 import "./Chat.css";
 
 const Chat = () => {
@@ -6,6 +7,42 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const chatContainerRef = useRef(null);
+  const [socket, setSocket] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
+  // Initialize socket connection
+  useEffect(() => {
+    // Connect to the server
+    const newSocket = io("http://localhost:4000");
+    setSocket(newSocket);
+
+    // Set up event listeners
+    newSocket.on("connect", () => {
+      console.log("Connected to server");
+      setIsConnected(true);
+    });
+
+    newSocket.on("disconnect", () => {
+      console.log("Disconnected from server");
+      setIsConnected(false);
+    });
+
+    // Listen for chat responses from the server
+    newSocket.on("chat_response", (response) => {
+      setIsTyping(false);
+      setChatHistory((prev) => [...prev, { 
+        sender: "shop", 
+        text: response,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }]);
+    });
+
+    // Clean up on component unmount
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
 
   // Auto-scroll to bottom of chat
   useEffect(() => {
@@ -15,35 +52,23 @@ const Chat = () => {
     }
   }, [chatHistory]);
 
-  // Simple response generator function
-  const getAutomatedResponse = (message) => {
-    const lowerMsg = message.toLowerCase();
-
-    if (lowerMsg.includes("hi") || lowerMsg.includes("hello")) {
-      return "Hello! How can I help you today?";
-    } else if (lowerMsg.includes("open") || lowerMsg.includes("hours")) {
-      return "Our shop is open Monday to Friday, 9 AM to 6 PM, and Saturday from 10 AM to 4 PM.";
-    } else if (lowerMsg.includes("location") || lowerMsg.includes("address")) {
-      return "We are located at 123 Fashion Street, Dhaka, Bangladesh.";
-    } else if (lowerMsg.includes("contact") || lowerMsg.includes("phone")) {
-      return "You can reach us at +880 123-456-7890 or email us at support@varsity.com";
-    } else {
-      return "Thank you for your message. For specific inquiries, please contact us directly or visit our Contact page.";
-    }
-  };
+  // This function is no longer needed as we're using the server for responses
 
   const sendMessage = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || !socket || !isConnected) return;
+
+    // Get current time for timestamp
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // Add user message to chat history
-    setChatHistory((prev) => [...prev, { sender: "user", text: message }]);
+    setChatHistory((prev) => [...prev, { sender: "user", text: message, timestamp }]);
 
-    // Get automated response
-    setTimeout(() => {
-      const response = getAutomatedResponse(message);
-      setChatHistory((prev) => [...prev, { sender: "shop", text: response }]);
-    }, 500); // Small delay to simulate response time
+    // Show typing indicator
+    setIsTyping(true);
+
+    // Send message to server via socket
+    socket.emit("chat_message", message);
 
     // Clear input
     setMessage("");
@@ -54,10 +79,25 @@ const Chat = () => {
 
     // If opening the chat and no messages yet, add a welcome message
     if (!isOpen && chatHistory.length === 0) {
+      const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       setChatHistory([
-        { sender: "shop", text: "Hello! How can I help you today?" },
+        { 
+          sender: "shop", 
+          text: "Hello! How can I help you today? You can ask me about our servers for different budgets.",
+          timestamp 
+        },
       ]);
     }
+  };
+
+  // Function to handle suggestion button clicks
+  const handleSuggestion = (suggestionText) => {
+    // Set the message to the suggestion text
+    setMessage(suggestionText);
+    
+    // Simulate a click on the send button
+    const fakeEvent = { preventDefault: () => {} };
+    sendMessage(fakeEvent);
   };
 
   return (
@@ -71,15 +111,49 @@ const Chat = () => {
       {isOpen && (
         <div className="chat-container">
           <div className="chat-header">
-            <h3>macHaven Shop Assistant</h3>
+            <h3>macHaven Shop Assistant {isConnected ? "(Connected)" : "(Connecting...)"}</h3>
           </div>
 
           <div className="chat-messages" ref={chatContainerRef}>
             {chatHistory.map((msg, index) => (
               <div key={index} className={`message ${msg.sender}`}>
-                <p>{msg.text}</p>
+                <div className="message-content">
+                  <p>{msg.text}</p>
+                  <span className="message-time">{msg.timestamp}</span>
+                </div>
               </div>
             ))}
+            {isTyping && (
+              <div className="message shop typing-indicator">
+                <div className="typing-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Suggestion buttons */}
+          <div className="chat-suggestions">
+            <button 
+              onClick={() => handleSuggestion("Which server is best for low budget?")}
+              className="suggestion-btn"
+            >
+              Low Budget Servers
+            </button>
+            <button 
+              onClick={() => handleSuggestion("Which server is best for mid budget?")}
+              className="suggestion-btn"
+            >
+              Mid Budget Servers
+            </button>
+            <button 
+              onClick={() => handleSuggestion("Which server is best for high budget?")}
+              className="suggestion-btn"
+            >
+              High Budget Servers
+            </button>
           </div>
 
           <form className="chat-input" onSubmit={sendMessage}>

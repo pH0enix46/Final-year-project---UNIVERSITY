@@ -69,6 +69,19 @@
   border-radius: 18px;
   max-width: 80%;
   word-wrap: break-word;
+  position: relative;
+}
+
+.message-content {
+  position: relative;
+}
+
+.message-time {
+  font-size: 10px;
+  color: #888;
+  display: block;
+  margin-top: 4px;
+  text-align: right;
 }
 
 .message.user {
@@ -119,4 +132,71 @@
 
 .chat-input button:hover {
   background-color: #45a049;
+}
+
+/* Styles for suggestion buttons */
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+.suggestion-btn {
+  background-color: #f1f9f1;
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-grow: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.suggestion-btn:hover {
+  background-color: #e6f7e6;
+  transform: translateY(-1px);
+}
+
+/* Typing indicator styles */
+.typing-indicator {
+  padding: 8px 12px;
+  display: inline-block;
+  max-width: 60px;
+}
+
+.typing-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background-color: #999;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  } 40% { 
+    transform: scale(1.0);
+  }
 }
