@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
       msgLower.includes("hi") ||
       msgLower.includes("hello")
     ) {
-      response = "Hello! How can I help you today?";
+      response = "Hello! How can we help you today?";
     } else if (
       msgLower.includes("open") ||
       msgLower.includes("hours")

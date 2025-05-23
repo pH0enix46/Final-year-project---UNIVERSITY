@@ -25,25 +25,39 @@ const App = () => {
   }, [token]);
 
   return (
-    <div className="bg-brand min-h-screen">
-      <ToastContainer />
+    <div className="bg-gradient-to-br from-brand to-primary min-h-screen">
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       {token === "" ? (
         <Login setToken={setToken} />
       ) : (
-        <>
+        <div className="flex flex-col h-screen overflow-hidden">
           <NavBar setToken={setToken} />
 
-          <div className="flex w-full">
+          <div className="flex flex-1 w-full overflow-hidden">
             <Sidebar />
-            <div className="flex-1 mx-8 my-8 text-gray-700 text-base">
-              <Routes>
-                <Route path="/add" element={<Add token={token} />} />
-                <Route path="/list" element={<List token={token} />} />
-                <Route path="/order" element={<Orders token={token} />} />
-              </Routes>
-            </div>
+            <main className="flex-1 p-6 overflow-auto bg-gray-100 bg-opacity-10 backdrop-blur-sm rounded-tl-3xl shadow-inner">
+              <div className="max-w-7xl mx-auto">
+                <Routes>
+                  <Route path="/" element={<Add token={token} />} />
+                  <Route path="/add" element={<Add token={token} />} />
+                  <Route path="/list" element={<List token={token} />} />
+                  <Route path="/order" element={<Orders token={token} />} />
+                </Routes>
+              </div>
+            </main>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

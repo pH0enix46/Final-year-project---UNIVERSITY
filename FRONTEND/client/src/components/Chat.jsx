@@ -31,11 +31,17 @@ const Chat = () => {
     // Listen for chat responses from the server
     newSocket.on("chat_response", (response) => {
       setIsTyping(false);
-      setChatHistory((prev) => [...prev, { 
-        sender: "shop", 
-        text: response,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }]);
+      setChatHistory((prev) => [
+        ...prev,
+        {
+          sender: "shop",
+          text: response,
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        },
+      ]);
     });
 
     // Clean up on component unmount
@@ -59,10 +65,16 @@ const Chat = () => {
     if (!message.trim() || !socket || !isConnected) return;
 
     // Get current time for timestamp
-    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const timestamp = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
     // Add user message to chat history
-    setChatHistory((prev) => [...prev, { sender: "user", text: message, timestamp }]);
+    setChatHistory((prev) => [
+      ...prev,
+      { sender: "user", text: message, timestamp },
+    ]);
 
     // Show typing indicator
     setIsTyping(true);
@@ -79,12 +91,15 @@ const Chat = () => {
 
     // If opening the chat and no messages yet, add a welcome message
     if (!isOpen && chatHistory.length === 0) {
-      const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const timestamp = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
       setChatHistory([
-        { 
-          sender: "shop", 
-          text: "Hello! How can I help you today? You can ask me about our servers for different budgets.",
-          timestamp 
+        {
+          sender: "shop",
+          text: "Hello! How can we help you today? You can ask us about our servers for different budgets.",
+          timestamp,
         },
       ]);
     }
@@ -94,7 +109,7 @@ const Chat = () => {
   const handleSuggestion = (suggestionText) => {
     // Set the message to the suggestion text
     setMessage(suggestionText);
-    
+
     // Simulate a click on the send button
     const fakeEvent = { preventDefault: () => {} };
     sendMessage(fakeEvent);
@@ -111,7 +126,10 @@ const Chat = () => {
       {isOpen && (
         <div className="chat-container">
           <div className="chat-header">
-            <h3>macHaven Shop Assistant {isConnected ? "(Connected)" : "(Connecting...)"}</h3>
+            <h3>
+              macHaven Shop Assistant{" "}
+              {isConnected ? "(Connected)" : "(Connecting...)"}
+            </h3>
           </div>
 
           <div className="chat-messages" ref={chatContainerRef}>
@@ -136,20 +154,26 @@ const Chat = () => {
 
           {/* Suggestion buttons */}
           <div className="chat-suggestions">
-            <button 
-              onClick={() => handleSuggestion("Which server is best for low budget?")}
+            <button
+              onClick={() =>
+                handleSuggestion("Which server is best for low budget?")
+              }
               className="suggestion-btn"
             >
               Low Budget Servers
             </button>
-            <button 
-              onClick={() => handleSuggestion("Which server is best for mid budget?")}
+            <button
+              onClick={() =>
+                handleSuggestion("Which server is best for mid budget?")
+              }
               className="suggestion-btn"
             >
               Mid Budget Servers
             </button>
-            <button 
-              onClick={() => handleSuggestion("Which server is best for high budget?")}
+            <button
+              onClick={() =>
+                handleSuggestion("Which server is best for high budget?")
+              }
               className="suggestion-btn"
             >
               High Budget Servers

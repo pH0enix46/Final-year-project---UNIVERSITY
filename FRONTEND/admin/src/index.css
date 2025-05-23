@@ -1,40 +1,159 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-*:focus {
-  outline: none !important;
-  box-shadow: none !important;
+:root {
+  --brand-color: #2f4f4f;
+  --primary-color: #3c6b6b;
+  --secondary-color: #4f767b;
 }
 
-/* Optional: if Tailwind still applies ring-black somewhere, block it here */
+* {
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+*:focus {
+  outline: none;
+}
+
 *:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
 }
 
 html {
-  font-family: "Itim";
+  font-family: "Inter", "Itim", system-ui, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--brand-color);
+  color: #f3f4f6;
+  overflow-x: hidden;
 }
 
 select,
 input,
 textarea {
-  border: 1px solid #c2c2c2;
-  outline-color: #c586a5;
-  border-radius: 4px;
-}
-.active {
-  background-color: #ffebf5;
-  border-color: #c586a5;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: rgba(243, 244, 246, 0.1);
+  color: #f3f4f6;
 }
 
-/* in your styles/globals.css or tailwind config */
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 1px var(--secondary-color);
+}
+
+select::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(156, 163, 175, 0.7);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(47, 79, 79, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(79, 118, 123, 0.7);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+
+/* Custom classes */
 .input-style {
-  @apply w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(156, 163, 175, 0.3);
+  border-radius: 0.5rem;
+  background-color: rgba(243, 244, 246, 0.1);
+  color: #f3f4f6;
+}
+
+.input-style:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 1px var(--secondary-color);
+}
+
+.input-style::placeholder {
+  color: rgba(209, 213, 219, 0.5);
+}
+
+.card {
+  background-color: rgba(47, 79, 79, 0.7);
+  backdrop-filter: blur(4px);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(75, 85, 99, 0.2);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary {
+  background-color: rgba(79, 118, 123, 0.8);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(79, 118, 123, 1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-outline {
+  border: 1px solid #d1d5db;
+  color: #e5e7eb;
+}
+
+.btn-outline:hover {
+  background-color: rgba(55, 65, 81, 0.3);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
