@@ -1,106 +1,221 @@
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "./../components/Title";
 import axios from "axios";
+import { FiPackage, FiTruck, FiCheck, FiAlertTriangle } from "react-icons/fi";
+import { Link } from "react-router-dom";
+
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-unescaped-entities */
 
 function Orders() {
   const { backendUrl, token, currency } = useContext(ShopContext);
-  const [orderData, setOrderData] = useState([]);
-  // console.log(orderData);
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const loadOrderData = async () => {
+  // Load order data function
+  const fetchOrders = async () => {
+    setIsLoading(true);
+    setError(null);
+
     try {
       if (!token) {
-        return null;
+        setIsLoading(false);
+        return;
       }
+
       const response = await axios.post(
-        backendUrl + "/api/order/userOrders",
+        `${backendUrl}/api/order/userOrders`,
         {},
         { headers: { token } }
       );
+
       if (response.data.success) {
-        let allOrderItems = [];
-        response.data.orders.map((order) => {
-          order.items.map((item) => {
-            item["status"] = order.status;
-            item["payment"] = order.payment;
-            item["paymentMethod"] = order.paymentMethod;
-            item["date"] = order.date;
-            allOrderItems.push(item);
-          });
-        });
-        console.log(allOrderItems);
-        setOrderData(allOrderItems.reverse());
+        // Keep the original order structure instead of flattening
+        setOrders(
+          response.data.orders.sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          )
+        );
+      } else {
+        setError(response.data.message || "Failed to load orders");
       }
     } catch (error) {
-      console.error(error);
+      setError(
+        error.response?.data?.message ||
+          error.message ||
+          "An error occurred while loading orders"
+      );
+      console.error("Order loading error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  // Call fetchOrders when component mounts
   useEffect(() => {
-    loadOrderData();
-  }, [token]);
+    fetchOrders();
+  }, []);
+
+  // Helper function to get status icon and color
+  const getStatusInfo = (status) => {
+    switch (status) {
+      case "Order Placed":
+        return {
+          icon: <FiPackage className="text-blue-500" />,
+          className: "text-blue-500",
+        };
+      case "Shipped":
+        return {
+          icon: <FiTruck className="text-orange-500" />,
+          className: "text-orange-500",
+        };
+      case "Delivered":
+        return {
+          icon: <FiCheck className="text-green-500" />,
+          className: "text-green-500",
+        };
+      case "Cancelled":
+        return {
+          icon: <FiAlertTriangle className="text-red-500" />,
+          className: "text-red-500",
+        };
+      default:
+        return {
+          icon: <FiPackage className="text-blue-500" />,
+          className: "text-blue-500",
+        };
+    }
+  };
+
+  // Format date to be more readable
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
-    <div className="pt-16">
-      <div className="text-2xl">
+    <div className="pt-16 pb-10">
+      <div className="text-2xl mb-6">
         <Title text1={"MY"} text2={"ORDERS"} />
       </div>
 
-      <div>
-        {orderData.map((item, index) => (
-          <div
-            key={index}
-            className="border-t border-b border-gray-500 text-gray-400 p-4  flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+      {isLoading ? (
+        <div className="flex justify-center items-center py-10">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-500"></div>
+        </div>
+      ) : error ? (
+        <div className="text-center py-8">
+          <p className="text-red-500 mb-4">{error}</p>
+          <button
+            onClick={fetchOrders}
+            className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors"
           >
-            <div className="flex items-start gap-6 text-sm">
-              <img
-                className="w-16 sm:w-20 rounded-md overflow-hidden shadow-lg"
-                src={item.image[0]}
-                alt="product_img"
-              />
-
-              <div>
-                <p className="sm:text-base font-medium">{item.name}</p>
-                <div className="flex items-center gap-3 mt-2 text-base text-gray-400">
-                  <p className="text-lg">
-                    {currency}
-                    {item.price}
+            Try Again
+          </button>
+        </div>
+      ) : orders.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-gray-400 mb-4">
+            You haven't placed any orders yet.
+          </p>
+          <Link
+            to="/collections"
+            className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors"
+          >
+            Start Shopping
+          </Link>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {orders.map((order) => (
+            <div
+              key={order._id}
+              className="border border-gray-700 rounded-lg overflow-hidden bg-gray-900 shadow-lg"
+            >
+              <div className="bg-gray-800 p-4 flex justify-between items-center">
+                <div>
+                  <p className="text-gray-300 text-sm">
+                    Order Date:{" "}
+                    <span className="font-medium">
+                      {formatDate(order.date)}
+                    </span>
                   </p>
-                  <p>Quantity: 1</p>
-                  <p>Color: Starlight</p>
+                  <p className="text-gray-300 text-sm mt-1">
+                    Order ID:{" "}
+                    <span className="font-mono text-xs">{order._id}</span>
+                  </p>
                 </div>
-
-                <p className="mt-1">
-                  Date:{" "}
-                  <span className="text-gray-400">
-                    {new Date(item.date).toDateString()}
+                <div className="flex items-center gap-2">
+                  {getStatusInfo(order.status).icon}
+                  <span
+                    className={`${
+                      getStatusInfo(order.status).className
+                    } font-medium`}
+                  >
+                    {order.status}
                   </span>
-                </p>
-                <p className="mt-1 border-b-2 border-b-green-600 w-fit">
-                  Payment:{" "}
-                  <span className="text-gray-400">{item.paymentMethod}</span>
-                </p>
-              </div>
-            </div>
-
-            <div className="md:w-1/2 flex justify-between">
-              <div className="flex items-center gap-2">
-                <p className="min-w-2 h-2 rounded-full bg-green-500 shadow-lg"></p>
-                <p className="text-sm sm:text-base">Ready to ship</p>
+                </div>
               </div>
 
-              <button
-                className="border-2 border-gray-500 px-4 py-2 text-sm font-medium rounded-lg shadow-xl "
-                onClick={loadOrderData}
-              >
-                Track Order!
-              </button>
+              <div className="p-4">
+                {order.items.map((item, itemIndex) => (
+                  <div
+                    key={itemIndex}
+                    className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-4 border-b border-gray-800 last:border-b-0"
+                  >
+                    <div className="flex items-start gap-4">
+                      <img
+                        className="w-16 sm:w-20 h-16 sm:h-20 object-cover rounded-md overflow-hidden shadow-lg"
+                        src={item.image[0]}
+                        alt={item.name}
+                      />
+
+                      <div>
+                        <p className="text-gray-300 font-medium">{item.name}</p>
+                        <div className="flex flex-wrap items-center gap-3 mt-2 text-gray-400">
+                          <p className="text-lg">
+                            {currency}
+                            {item.price}
+                          </p>
+                          <p>Quantity: {item.quantity || 1}</p>
+                          {item.color && <p>Color: {item.color}</p>}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gray-800 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                  <p className="text-gray-300 text-sm">
+                    Payment Method:{" "}
+                    <span className="font-medium">{order.paymentMethod}</span>
+                  </p>
+                  <p className="text-gray-300 text-sm mt-1">
+                    Payment Status:
+                    <span
+                      className={
+                        order.payment
+                          ? "text-green-500 ml-1"
+                          : "text-yellow-500 ml-1"
+                      }
+                    >
+                      {order.payment ? "Paid" : "Pending"}
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
 export default Orders;
