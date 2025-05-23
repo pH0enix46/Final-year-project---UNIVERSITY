@@ -5,11 +5,13 @@ import { useState, useEffect } from "react";
 
 const List = () => {
   const [list, setList] = useState([]);
-  console.log(...list);
+  const [loading, setLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(null);
 
   const fetchList = async () => {
+    setLoading(true);
     try {
-      const response = await axios.get(backendUrl + "api/product/list");
+      const response = await axios.get(backendUrl + "/api/product/list");
       if (response.data.success) {
         setList(response.data.products);
       } else {
@@ -18,6 +20,8 @@ const List = () => {
     } catch (error) {
       console.error(error);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -27,6 +31,7 @@ const List = () => {
 
   const removeProduct = async (id) => {
     try {
+      setDeleteLoading(id);
       const token = localStorage.getItem("token");
       if (!token) {
         toast.error("Authentication token not found");
@@ -34,7 +39,7 @@ const List = () => {
       }
 
       const response = await axios.post(
-        backendUrl + "api/product/remove",
+        backendUrl + "/api/product/remove",
         { id },
         { headers: { token } }
       );
@@ -48,6 +53,8 @@ const List = () => {
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || error.message);
+    } finally {
+      setDeleteLoading(null);
     }
   };
 
@@ -57,16 +64,25 @@ const List = () => {
         All Products List
       </h2>
 
-      <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] bg-secondary text-gray-300 text-sm font-medium border-y rounded-t-md px-4 py-3 ">
-        <span>Image</span>
-        <span>Name</span>
-        <span>Category</span>
-        <span>Price</span>
-        <span className="text-center">Action</span>
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center h-40">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"></div>
+        </div>
+      ) : (
+        <>
+          <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] bg-secondary text-gray-300 text-sm font-medium border-y rounded-t-md px-4 py-3 ">
+            <span>Image</span>
+            <span>Name</span>
+            <span>Category</span>
+            <span>Price</span>
+            <span className="text-center">Action</span>
+          </div>
 
-      <div className="flex flex-col">
-        {list.map((item, index) => (
+          <div className="flex flex-col">
+            {list.length === 0 ? (
+              <div className="text-center py-8 text-gray-300">No products found</div>
+            ) : (
+              list.map((item, index) => (
           <div
             key={index}
             className="grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center border-b px-4 py-3 text-sm bg-primary transition duration-200"
@@ -86,15 +102,23 @@ const List = () => {
             <div className="text-center">
               <button
                 onClick={() => removeProduct(item._id)}
-                className="bg-red-200 text-red-600 hover:bg-red-400 transition-all duration-200 p-2 rounded-full font-bold shadow-sm hover:shadow-md w-10 h-10"
+                disabled={deleteLoading === item._id}
+                className={`${deleteLoading === item._id ? 'bg-gray-300 text-gray-500' : 'bg-red-200 text-red-600 hover:bg-red-400'} transition-all duration-200 p-2 rounded-full font-bold shadow-sm hover:shadow-md w-10 h-10 flex items-center justify-center`}
                 title="Remove Item"
               >
-                ✕
+                {deleteLoading === item._id ? (
+                  <div className="animate-spin h-5 w-5 border-t-2 border-b-2 border-red-600 rounded-full"></div>
+                ) : (
+                  '✕'
+                )}
               </button>
             </div>
           </div>
-        ))}
-      </div>
+              ))
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

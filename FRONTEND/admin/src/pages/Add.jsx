@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { assets } from "../assets/assets";
 import axios from "axios";
-import { backendUrl } from "../App";
+import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
@@ -39,7 +39,7 @@ const Add = ({ token }) => {
       image4 && formData.append("image4", image4);
 
       const response = await axios.post(
-        backendUrl + "api/product/add",
+        backendUrl + "/api/product/add",
         formData,
         { headers: { token } }
       );
@@ -173,7 +173,7 @@ const Add = ({ token }) => {
             </div>
 
             <div>
-              <label htmlFor="product-price" className="block text-sm font-medium mb-2 text-gray-200">Price ($)</label>
+              <label htmlFor="product-price" className="block text-sm font-medium mb-2 text-gray-200">Price ({currency})</label>
               <input
                 id="product-price"
                 onChange={(e) => setPrice(e.target.value)}

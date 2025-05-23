@@ -7,13 +7,16 @@ import { assets } from "../assets/assets";
 // eslint-disable-next-line react/prop-types
 const Orders = ({ token }) => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(null);
 
   const fetchAllOrders = async () => {
     if (!token) return;
-
+    
+    setLoading(true);
     try {
       const response = await axios.post(
-        `${backendUrl}api/order/list`,
+        `${backendUrl}/api/order/list`,
         {},
         { headers: { token } }
       );
@@ -24,17 +27,20 @@ const Orders = ({ token }) => {
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
   const deleteOrderHandler = async (orderId) => {
     if (!window.confirm('Are you sure you want to delete this order?')) return;
     
+    setDeleteLoading(orderId);
     try {
       // Since there's no dedicated delete endpoint, we'll mark the order as "Deleted"
       // using the existing status update endpoint
       const response = await axios.post(
-        `${backendUrl}api/order/status`,
+        `${backendUrl}/api/order/status`,
         { orderId, status: "Deleted" },
         { headers: { token } }
       );
@@ -48,22 +54,30 @@ const Orders = ({ token }) => {
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to delete order");
+    } finally {
+      setDeleteLoading(null);
     }
   };
 
   useEffect(() => {
     fetchAllOrders();
-  }, [token]);
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="mt-4 sm:mt-6">
       <h3 className="text-xl sm:text-2xl font-bold text-gray-300 mb-4 sm:mb-6">Customer Orders</h3>
-      <div className="flex flex-col gap-4 sm:gap-5">
-        {orders.length === 0 ? (
-          <div className="card p-6 text-center text-gray-300">
-            <p>No orders found</p>
-          </div>
-        ) : (
+      
+      {loading ? (
+        <div className="flex justify-center items-center h-40">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary"></div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4 sm:gap-5">
+          {orders.length === 0 ? (
+            <div className="card p-6 text-center text-gray-300">
+              <p>No orders found</p>
+            </div>
+          ) : (
           orders.map((order, index) => (
             <div
               key={index}
@@ -124,20 +138,26 @@ const Orders = ({ token }) => {
                 <div className="flex justify-end items-center mt-2 sm:mt-0">
                   <button
                     onClick={() => deleteOrderHandler(order._id)}
-                    className="btn btn-outline bg-red-500 bg-opacity-10 hover:bg-red-500 hover:bg-opacity-20 border-red-400 border-opacity-30 text-red-100 py-1.5 sm:py-2 px-3 sm:px-4 text-sm"
+                    disabled={deleteLoading === order._id}
+                    className={`btn btn-outline ${deleteLoading === order._id ? 'bg-gray-500 bg-opacity-20 cursor-not-allowed' : 'bg-red-500 bg-opacity-10 hover:bg-red-500 hover:bg-opacity-20'} border-red-400 border-opacity-30 text-red-100 py-1.5 sm:py-2 px-3 sm:px-4 text-sm flex items-center`}
                     aria-label="Delete order"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1" viewBox="0 0 24 24" fill="currentColor">
-                      <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
+                    {deleteLoading === order._id ? (
+                      <div className="animate-spin h-4 w-4 sm:h-5 sm:w-5 mr-1 border-t-2 border-b-2 border-red-100 rounded-full"></div>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1" viewBox="0 0 24 24" fill="currentColor">
+                        <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                    )}
                     <span className="hidden xs:inline">Delete</span>
                   </button>
                 </div>
               </div>
             </div>
           ))
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

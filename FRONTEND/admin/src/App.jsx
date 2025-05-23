@@ -12,7 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 // eslint-disable-next-line react-refresh/only-export-components
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 // console.log("Backend URL:", backendUrl);
-export const currency = "$";
+
+// Currency symbol (Bangladeshi Taka)
+export const currency = "৳";
 
 const App = () => {
   const [token, setToken] = useState(
