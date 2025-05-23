@@ -2,9 +2,9 @@
 
 ## You can use this project for your university project or any other project, but remember to give proper credit to the original developer. ENJOY!!
 
-## [client link](https://machaven.netlify.app/)
+<a href="https://machaven.netlify.app/">✅ client link</a>
 
-## [admin link](https://machaven-admin.netlify.app/) admin email: machaven@gmail.com & password: machaven4646@
+<a href="https://machaven-admin.netlify.app/">✅ admin link</a> admin email: "machaven@gmail.com" & password: "machaven4646@"
 
 ## Technologies used
 
