@@ -27,21 +27,27 @@ const Orders = ({ token }) => {
     }
   };
 
-  const statusHandler = async (event, orderId) => {
+  const deleteOrderHandler = async (orderId) => {
+    if (!window.confirm('Are you sure you want to delete this order?')) return;
+    
     try {
+      // Since there's no dedicated delete endpoint, we'll mark the order as "Deleted"
+      // using the existing status update endpoint
       const response = await axios.post(
-        `${backendUrl}/api/order/status`,
-        { orderId, status: event.target.value },
+        `${backendUrl}api/order/status`,
+        { orderId, status: "Deleted" },
         { headers: { token } }
       );
+      
       if (response.data.success) {
-        toast.success("Order status updated");
-        await fetchAllOrders();
+        toast.success("Order marked as deleted");
+        // Update the orders list by filtering out the deleted order from UI
+        setOrders(orders.filter(order => order._id !== orderId));
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update status");
+      toast.error(error.response?.data?.message || "Failed to delete order");
     }
   };
 
@@ -50,73 +56,87 @@ const Orders = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="mt-6">
-      <h3 className="text-2xl font-bold text-gray-300 mb-6">Orders</h3>
-      <div className="flex flex-col gap-5">
-        {orders.map((order, index) => (
-          <div
-            key={index}
-            className="grid grid-cols-1 sm:grid-cols-[0.4fr_2fr_1fr] lg:grid-cols-[0.4fr_2fr_1fr_1fr_1fr] gap-4 items-start border rounded-xl p-5 bg-primary border-none shadow shadow-gray-400 text-gray-300!"
-          >
-            <img
-              className="w-14 h-14 object-contain"
-              src={assets.parcel_icon}
-              alt="Parcel Icon"
-            />
-
-            {/* Order Details */}
-            <div className="text-gray-300 text-md space-y-1">
-              <div>
-                {order.items.map((item, idx) => (
-                  <p key={idx}>
-                    <span className="font-medium">{item.name}</span> x{" "}
-                    {item.quantity} ({item.size})
-                  </p>
-                ))}
-              </div>
-              <p className="font-semibold pt-2">
-                {order.address.firstName} {order.address.lastName}
-              </p>
-              <div className="text-xs">
-                <p>
-                  {order.address.city}, {order.address.country}
-                </p>
-              </div>
-              <p className="text-lg font-medium pt-1">
-                📳 {order.address.phone}
-              </p>
-            </div>
-
-            {/* Meta Info */}
-            <div className="text-sm text-gray-300 space-y-1">
-              <p className="text-base font-semibold">
-                Items: {order.items.length}
-              </p>
-              <p>Method: {order.paymentMethod}</p>
-              <p>Payment: {order.payment}</p>
-              <p>Date: {new Date(order.date).toLocaleDateString()}</p>
-            </div>
-
-            {/* Total */}
-            <div className="text-base font-bold text-green-500 flex items-center">
-              {currency}
-              {order.amount}
-            </div>
-
-            {/* Status Select */}
-            <select
-              onChange={(event) => statusHandler(event, order._id)}
-              value={order.status}
-              className="p-2 rounded-md border bg-secondary font-semibold text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <option value="Order Placed">Order Placed</option>
-              <option value="Packing">Packing</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Out for delivery">Out for delivery</option>
-              <option value="Delivered">Delivered</option>
-            </select>
+    <div className="mt-4 sm:mt-6">
+      <h3 className="text-xl sm:text-2xl font-bold text-gray-300 mb-4 sm:mb-6">Customer Orders</h3>
+      <div className="flex flex-col gap-4 sm:gap-5">
+        {orders.length === 0 ? (
+          <div className="card p-6 text-center text-gray-300">
+            <p>No orders found</p>
           </div>
-        ))}
+        ) : (
+          orders.map((order, index) => (
+            <div
+              key={index}
+              className="card overflow-hidden"
+            >
+              <div className="p-4 sm:p-5 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] items-start">
+                {/* Order Details Column */}
+                <div className="flex gap-3 sm:gap-4">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="w-12 h-12 sm:w-14 sm:h-14 object-contain bg-secondary bg-opacity-20 p-2 rounded-full"
+                      src={assets.parcel_icon}
+                      alt="Parcel Icon"
+                    />
+                  </div>
+                  
+                  <div className="text-gray-300 text-sm sm:text-md space-y-1 flex-1">
+                    <div className="space-y-0.5">
+                      {order.items.map((item, idx) => (
+                        <p key={idx} className="line-clamp-1">
+                          <span className="font-medium">{item.name}</span> x{" "}
+                          {item.quantity} {item.size && `(${item.size})`}
+                        </p>
+                      ))}
+                    </div>
+                    <p className="font-semibold pt-2">
+                      {order.address.firstName} {order.address.lastName}
+                    </p>
+                    <div className="text-xs">
+                      <p>
+                        {order.address.city}, {order.address.country}
+                      </p>
+                    </div>
+                    <p className="text-base font-medium pt-1">
+                      📳 {order.address.phone}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Meta Info Column */}
+                <div className="text-sm text-gray-300 space-y-1 flex flex-col sm:flex-row md:flex-col justify-between sm:items-center md:items-start gap-2 sm:gap-4">
+                  <div>
+                    <p className="text-base font-semibold">
+                      Items: {order.items.length}
+                    </p>
+                    <p>Method: {order.paymentMethod}</p>
+                    <p>Payment: {order.payment ? "Paid" : "Pending"}</p>
+                    <p>Date: {new Date(order.date).toLocaleDateString()}</p>
+                  </div>
+                  
+                  <div className="text-lg font-bold text-green-500 flex items-center">
+                    {currency}
+                    {order.amount}
+                  </div>
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex justify-end items-center mt-2 sm:mt-0">
+                  <button
+                    onClick={() => deleteOrderHandler(order._id)}
+                    className="btn btn-outline bg-red-500 bg-opacity-10 hover:bg-red-500 hover:bg-opacity-20 border-red-400 border-opacity-30 text-red-100 py-1.5 sm:py-2 px-3 sm:px-4 text-sm"
+                    aria-label="Delete order"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1" viewBox="0 0 24 24" fill="currentColor">
+                      <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    <span className="hidden xs:inline">Delete</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
