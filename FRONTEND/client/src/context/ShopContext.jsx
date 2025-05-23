@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { products } from "../assets/frontend_assets/assets";
@@ -107,35 +107,39 @@ function ShopContextProvider({ children }) {
     return totalAmount;
   }
 
-  async function fetchProducts() {
+  const fetchProducts = useCallback(async () => {
     try {
       const res = await axios.get(`${backendUrl}/api/product/list`);
       if (res.data.success) {
-        setProductData(res.data.productss);
+        // Set productData to the API products
+        setProductData(res.data.products);
       }
     } catch (err) {
       toast.error(err.message);
     }
-  }
+  }, [backendUrl, setProductData]);
 
-  async function fetchCart(token) {
-    try {
-      const res = await axios.post(
-        `${backendUrl}/api/cart/get`,
-        {},
-        { headers: { token } }
-      );
-      if (res.data.success) {
-        setCartItems(res.data.cartData);
+  const fetchCart = useCallback(
+    async (token) => {
+      try {
+        const res = await axios.post(
+          `${backendUrl}/api/cart/get`,
+          {},
+          { headers: { token } }
+        );
+        if (res.data.success) {
+          setCartItems(res.data.cartData);
+        }
+      } catch (err) {
+        toast.error(err.message);
       }
-    } catch (err) {
-      toast.error(err.message);
-    }
-  }
+    },
+    [backendUrl, setCartItems]
+  );
 
   useEffect(() => {
     fetchProducts();
-  }, [token]);
+  }, [fetchProducts]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -143,10 +147,22 @@ function ShopContextProvider({ children }) {
       setToken(storedToken);
       fetchCart(storedToken);
     }
-  }, [token]);
+  }, [token, fetchCart]);
+
+  // Combine static products with dynamic products from API
+  const combinedProducts = [...products];
+  
+  // Add products from API that aren't in the static list
+  if (productData && productData.length > 0) {
+    const staticIds = products.map(p => p._id);
+    const newProducts = productData.filter(p => !staticIds.includes(p._id));
+    combinedProducts.push(...newProducts);
+  }
 
   const value = {
     productData,
+    // Use combinedProducts as the main products list
+    products: combinedProducts,
     currency,
     delivery_fee,
     search,
@@ -163,7 +179,6 @@ function ShopContextProvider({ children }) {
     token,
     setToken,
     setProductData,
-    products,
     setCartItems,
   };
 
