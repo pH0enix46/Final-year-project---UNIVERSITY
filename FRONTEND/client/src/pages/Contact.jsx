@@ -1,7 +1,58 @@
+import { useState } from "react";
 import Title from "../components/Title";
 import { IoLogoFacebook, IoLogoYoutube } from "react-icons/io";
+import axios from "axios";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    message: ""
+  });
+  const [status, setStatus] = useState({
+    submitting: false,
+    success: false,
+    error: null
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ submitting: true, success: false, error: null });
+    
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/contact",
+        formData
+      );
+      
+      if (response.data.success) {
+        setStatus({
+          submitting: false,
+          success: true,
+          error: null
+        });
+        // Reset form
+        setFormData({ username: "", email: "", message: "" });
+      } else {
+        throw new Error(response.data.message || "Failed to send message");
+      }
+    } catch (error) {
+      setStatus({
+        submitting: false,
+        success: false,
+        error: error.message || "Something went wrong. Please try again."
+      });
+    }
+  };
+  
   return (
     <div>
       <div className="pt-8">
@@ -70,7 +121,25 @@ function Contact() {
               us then drop us a line
             </p>
 
-            <form>
+            <form onSubmit={handleSubmit}>
+              {status.success && (
+                <div className="alert alert-success mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Message sent successfully!</span>
+                </div>
+              )}
+              
+              {status.error && (
+                <div className="alert alert-error mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>{status.error}</span>
+                </div>
+              )}
+              
               <div className="flex flex-col lg:flex-row mt-8 gap-5 mb-4">
                 <label className="input input-bordered flex items-center gap-2 w-full bg-gray-900">
                   <svg
@@ -83,6 +152,9 @@ function Contact() {
                   </svg>
                   <input
                     type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
                     className="grow"
                     placeholder="Username"
                     required
@@ -99,7 +171,10 @@ function Contact() {
                     <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                   </svg>
                   <input
-                    type="text"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="grow"
                     placeholder="Email"
                     required
@@ -108,14 +183,21 @@ function Contact() {
               </div>
 
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 className="textarea textarea-bordered w-full h-44 text-lg bg-gray-900"
                 placeholder="Your message"
                 required
               ></textarea>
 
               {/* BUTTON */}
-              <button className="btn btn-active btn-neutral w-full mt-4 text-gray-400 text-lg bg-gray-900">
-                Send Us
+              <button 
+                type="submit" 
+                className="btn btn-active btn-neutral w-full mt-4 text-gray-400 text-lg bg-gray-900"
+                disabled={status.submitting}
+              >
+                {status.submitting ? "Sending..." : "Send Us"}
               </button>
             </form>
           </div>

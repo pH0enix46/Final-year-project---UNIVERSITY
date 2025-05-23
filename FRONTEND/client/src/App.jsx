@@ -14,7 +14,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import Chat from "./components/Chat";
-import Loader from "./components/Loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,20 +22,19 @@ export const LoadingContext = createContext();
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     // Simulate initial app loading
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-    
+
     return () => clearTimeout(timer);
   }, []);
-  
+
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
       <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[8vw] font-itim bg-[#2f4f4f] text-gray-400">
-        {isLoading && <Loader size="large" fullScreen={true} />}
         <ToastContainer />
         <Navbar />
         <SearchBar />
