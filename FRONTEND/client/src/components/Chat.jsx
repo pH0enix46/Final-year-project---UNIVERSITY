@@ -11,10 +11,13 @@ const Chat = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
 
+  // Get backend URL from environment variable
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   // Initialize socket connection
   useEffect(() => {
-    // Connect to the server
-    const newSocket = io("http://localhost:4000");
+    // Connect to the server using environment variable
+    const newSocket = io(backendUrl);
     setSocket(newSocket);
 
     // Set up event listeners
