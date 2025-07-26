@@ -51,6 +51,19 @@ const Sidebar = ({ closeSidebar }) => {
 
       <div className="p-5 space-y-5 font-medium overflow-y-auto">
         <NavLink
+          to="/dashboard"
+          onClick={handleLinkClick}
+          className={({ isActive }) =>
+            `${linkStyle} ${isActive ? activeStyle : ""}`
+          }
+        >
+          <div className="p-2 rounded bg-brand bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300">
+            <img className="w-5 h-5" src={assets.dashboard_icon} alt="Dashboard" />
+          </div>
+          <span className="text-base">Dashboard</span>
+        </NavLink>
+
+        <NavLink
           to="/add"
           onClick={handleLinkClick}
           className={({ isActive }) =>

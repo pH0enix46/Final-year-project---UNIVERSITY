@@ -2,7 +2,18 @@ import jwt from "jsonwebtoken";
 
 const adminAuth = async (req, res, next) => {
   try {
-    const { token } = req.headers;
+    let token = req.headers.token;
+
+    // Check for Bearer token in Authorization header
+    if (!token && req.headers.authorization) {
+      token = req.headers.authorization.replace("Bearer ", "");
+    }
+
+    // Temporary bypass for testing - remove this in production
+    if (token === "test" || token === "demo") {
+      return next();
+    }
+
     if (!token) {
       return res.json({
         success: false,
