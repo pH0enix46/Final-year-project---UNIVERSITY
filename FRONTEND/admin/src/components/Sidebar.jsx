@@ -160,12 +160,12 @@ const Sidebar = ({ closeSidebar }) => {
       </div>
 
       {/* Help Section */}
-      <div className="p-6 border-t border-white border-opacity-10">
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-white to-gray-100 bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+      <div className="p-4 border-t border-white border-opacity-10">
+        <div className="p-3 rounded-xl bg-gradient-to-r from-white to-gray-100 bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
               <svg
-                className="w-4 h-4 text-white"
+                className="w-3 h-3 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -178,12 +178,12 @@ const Sidebar = ({ closeSidebar }) => {
                 />
               </svg>
             </div>
-            <h3 className="font-semibold text-white">Need Help?</h3>
+            <h3 className="text-sm font-semibold text-gray-800">Need Help?</h3>
           </div>
-          <p className="text-sm text-gray-300 opacity-80 mb-3">
+          <p className="text-xs text-gray-800 opacity-70 mb-2">
             Check the documentation or contact support for assistance.
           </p>
-          <button className="w-full py-2 px-4 rounded-xl bg-white bg-opacity-10 text-white text-sm font-medium hover:bg-opacity-20 transition-all duration-300">
+          <button className="w-full py-1.5 px-3 rounded-lg bg-white bg-opacity-10 text-white text-xs font-medium hover:bg-opacity-20 transition-all duration-300">
             Get Support
           </button>
         </div>
