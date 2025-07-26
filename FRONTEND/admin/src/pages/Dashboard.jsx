@@ -52,7 +52,7 @@ const Dashboard = () => {
     }
   };
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
+  const COLORS = ["#2f4f4f", "#3c6b6b", "#4f767b", "#5a8a8a", "#6b9b9b"];
 
   if (loading) {
     return (
@@ -75,8 +75,8 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Dashboard</h1>
+      <div className="bg-gray-50 rounded-xl shadow-sm p-6 border border-gray-200">
+        <h1 className="text-3xl font-bold text-brand mb-2">Dashboard</h1>
         <p className="text-gray-600">
           Real-time insights into your store performance
         </p>
@@ -84,15 +84,15 @@ const Dashboard = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-brand to-primary rounded-xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-blue-100 text-sm font-medium">Total Revenue</p>
+              <p className="text-gray-100 text-sm font-medium">Total Revenue</p>
               <p className="text-2xl font-bold">
                 {currency} {summary.totalRevenue.toLocaleString()}
               </p>
             </div>
-            <div className="bg-blue-400 bg-opacity-30 p-3 rounded-lg">
+            <div className="bg-secondary bg-opacity-30 p-3 rounded-lg">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -110,13 +110,13 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-primary to-secondary rounded-xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-green-100 text-sm font-medium">Total Orders</p>
+              <p className="text-gray-100 text-sm font-medium">Total Orders</p>
               <p className="text-2xl font-bold">{summary.totalOrders}</p>
             </div>
-            <div className="bg-green-400 bg-opacity-30 p-3 rounded-lg">
+            <div className="bg-brand bg-opacity-30 p-3 rounded-lg">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -134,18 +134,18 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-secondary to-brand rounded-xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-purple-100 text-sm font-medium">This Week</p>
+              <p className="text-gray-100 text-sm font-medium">This Week</p>
               <p className="text-2xl font-bold">
                 {currency} {summary.weeklyRevenue.toLocaleString()}
               </p>
-              <p className="text-purple-100 text-sm">
+              <p className="text-gray-100 text-sm">
                 {summary.weeklyOrders} orders
               </p>
             </div>
-            <div className="bg-purple-400 bg-opacity-30 p-3 rounded-lg">
+            <div className="bg-primary bg-opacity-30 p-3 rounded-lg">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -163,18 +163,18 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-brand to-secondary rounded-xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-orange-100 text-sm font-medium">This Month</p>
+              <p className="text-gray-100 text-sm font-medium">This Month</p>
               <p className="text-2xl font-bold">
                 {currency} {summary.monthlyRevenue.toLocaleString()}
               </p>
-              <p className="text-orange-100 text-sm">
+              <p className="text-gray-100 text-sm">
                 {summary.monthlyOrders} orders
               </p>
             </div>
-            <div className="bg-orange-400 bg-opacity-30 p-3 rounded-lg">
+            <div className="bg-primary bg-opacity-30 p-3 rounded-lg">
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -196,8 +196,8 @@ const Dashboard = () => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Daily Sales Chart */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-gray-50 rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold text-brand mb-4">
             Daily Sales (Last 7 Days)
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -213,7 +213,7 @@ const Dashboard = () => {
                 formatter={(value) => [`${currency}${value}`, "Revenue"]}
                 labelStyle={{ color: "#374151" }}
                 contentStyle={{
-                  backgroundColor: "white",
+                  backgroundColor: "#f9fafb",
                   border: "1px solid #e5e7eb",
                   borderRadius: "8px",
                 }}
@@ -222,18 +222,18 @@ const Dashboard = () => {
               <Line
                 type="monotone"
                 dataKey="revenue"
-                stroke="#3b82f6"
+                stroke="#3c6b6b"
                 strokeWidth={3}
-                dot={{ fill: "#3b82f6", strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: "#3b82f6", strokeWidth: 2 }}
+                dot={{ fill: "#3c6b6b", strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: "#3c6b6b", strokeWidth: 2 }}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
         {/* Monthly Sales Chart */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-gray-50 rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold text-brand mb-4">
             Monthly Sales (Last 6 Months)
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -249,20 +249,20 @@ const Dashboard = () => {
                 formatter={(value) => [`${currency}${value}`, "Revenue"]}
                 labelStyle={{ color: "#374151" }}
                 contentStyle={{
-                  backgroundColor: "white",
+                  backgroundColor: "#f9fafb",
                   border: "1px solid #e5e7eb",
                   borderRadius: "8px",
                 }}
               />
               <Legend />
-              <Bar dataKey="revenue" fill="#10b981" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="revenue" fill="#4f767b" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Top Products Chart */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-gray-50 rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold text-brand mb-4">
             Top Selling Products
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -285,19 +285,19 @@ const Dashboard = () => {
                 formatter={(value) => [value, "Quantity Sold"]}
                 labelStyle={{ color: "#374151" }}
                 contentStyle={{
-                  backgroundColor: "white",
+                  backgroundColor: "#f9fafb",
                   border: "1px solid #e5e7eb",
                   borderRadius: "8px",
                 }}
               />
-              <Bar dataKey="quantity" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="quantity" fill="#2f4f4f" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Order Status Distribution */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-gray-50 rounded-xl shadow-sm p-6 border border-gray-200">
+          <h3 className="text-xl font-semibold text-brand mb-4">
             Order Status Distribution
           </h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -325,7 +325,7 @@ const Dashboard = () => {
                 formatter={(value) => [value, "Orders"]}
                 labelStyle={{ color: "#374151" }}
                 contentStyle={{
-                  backgroundColor: "white",
+                  backgroundColor: "#f9fafb",
                   border: "1px solid #e5e7eb",
                   borderRadius: "8px",
                 }}
@@ -336,17 +336,15 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          Quick Actions
-        </h3>
+      <div className="bg-gray-50 rounded-xl shadow-sm p-6 border border-gray-200">
+        <h3 className="text-xl font-semibold text-brand mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button
             onClick={() => navigate("/add")}
-            className="flex items-center justify-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+            className="flex items-center justify-center p-4 bg-brand bg-opacity-10 hover:bg-brand hover:bg-opacity-20 rounded-lg transition-colors duration-200"
           >
             <svg
-              className="w-5 h-5 text-blue-600 mr-2"
+              className="w-5 h-5 text-brand mr-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -358,15 +356,15 @@ const Dashboard = () => {
                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
               />
             </svg>
-            <span className="text-blue-600 font-medium">Add New Product</span>
+            <span className="text-brand font-medium">Add New Product</span>
           </button>
 
           <button
             onClick={() => navigate("/order")}
-            className="flex items-center justify-center p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors duration-200"
+            className="flex items-center justify-center p-4 bg-primary bg-opacity-10 hover:bg-primary hover:bg-opacity-20 rounded-lg transition-colors duration-200"
           >
             <svg
-              className="w-5 h-5 text-green-600 mr-2"
+              className="w-5 h-5 text-primary mr-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -378,15 +376,15 @@ const Dashboard = () => {
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               />
             </svg>
-            <span className="text-green-600 font-medium">View Orders</span>
+            <span className="text-primary font-medium">View Orders</span>
           </button>
 
           <button
             onClick={() => navigate("/list")}
-            className="flex items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors duration-200"
+            className="flex items-center justify-center p-4 bg-secondary bg-opacity-10 hover:bg-secondary hover:bg-opacity-20 rounded-lg transition-colors duration-200"
           >
             <svg
-              className="w-5 h-5 text-purple-600 mr-2"
+              className="w-5 h-5 text-secondary mr-2"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -398,9 +396,7 @@ const Dashboard = () => {
                 d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
               />
             </svg>
-            <span className="text-purple-600 font-medium">
-              Manage Inventory
-            </span>
+            <span className="text-secondary font-medium">Manage Inventory</span>
           </button>
         </div>
       </div>

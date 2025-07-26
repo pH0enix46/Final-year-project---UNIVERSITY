@@ -4,9 +4,9 @@ import { assets } from "../assets/assets";
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ closeSidebar }) => {
   const linkStyle =
-    "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-gray-100 hover:bg-secondary hover:shadow-md group";
+    "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 text-gray-100 hover:bg-white hover:bg-opacity-10 hover:shadow-lg group relative overflow-hidden backdrop-blur-sm";
   const activeStyle =
-    "bg-secondary text-white shadow-md border-l-4 border-gray-200";
+    "bg-gradient-to-r from-primary to-secondary text-white shadow-xl border-l-3 border-white transform scale-102";
 
   const handleLinkClick = () => {
     // Close sidebar on mobile when a link is clicked
@@ -16,24 +16,43 @@ const Sidebar = ({ closeSidebar }) => {
   };
 
   return (
-    <aside className="w-full h-full bg-brand bg-opacity-95 shadow-xl flex flex-col overflow-hidden">
-      <div className="flex items-center justify-between p-5 border-b border-gray-700 border-opacity-50">
-        <div>
-          <h2 className="text-xl font-semibold text-gray-100">
-            Admin Panel
-          </h2>
+    <aside className="w-full h-full bg-gradient-to-br from-brand via-primary to-secondary shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl border-r border-white border-opacity-10">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6 border-b border-white border-opacity-10 bg-white bg-opacity-5">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-white to-gray-200 flex items-center justify-center shadow-md">
+            <svg
+              className="w-4 h-4 text-brand"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-white">Admin Panel</h2>
+            <p className="text-xs text-gray-300 opacity-70">
+              Dashboard Control
+            </p>
+          </div>
         </div>
-        
+
         {/* Close button for mobile */}
         {closeSidebar && (
           <button
             onClick={closeSidebar}
-            className="lg:hidden p-2 rounded-md bg-gray-800 bg-opacity-30 text-gray-300"
+            className="lg:hidden p-2 rounded-lg bg-white bg-opacity-10 text-white hover:bg-opacity-20 transition-all duration-300 backdrop-blur-sm"
             aria-label="Close sidebar"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -49,7 +68,8 @@ const Sidebar = ({ closeSidebar }) => {
         )}
       </div>
 
-      <div className="p-5 space-y-5 font-medium overflow-y-auto">
+      {/* Navigation Links */}
+      <div className="flex-1 p-4 space-y-2 overflow-y-auto">
         <NavLink
           to="/dashboard"
           onClick={handleLinkClick}
@@ -57,10 +77,19 @@ const Sidebar = ({ closeSidebar }) => {
             `${linkStyle} ${isActive ? activeStyle : ""}`
           }
         >
-          <div className="p-2 rounded bg-brand bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300">
-            <img className="w-5 h-5" src={assets.dashboard_icon} alt="Dashboard" />
+          <div className="p-2.5 rounded-lg bg-white bg-opacity-10 group-hover:bg-opacity-20 transition-all duration-300 backdrop-blur-sm">
+            <img
+              className="w-4 h-4 filter brightness-0 invert"
+              src={assets.dashboard_icon}
+              alt="Dashboard"
+            />
           </div>
-          <span className="text-base">Dashboard</span>
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">Dashboard</span>
+            <span className="text-xs text-gray-300 opacity-60">
+              Analytics & Overview
+            </span>
+          </div>
         </NavLink>
 
         <NavLink
@@ -70,10 +99,19 @@ const Sidebar = ({ closeSidebar }) => {
             `${linkStyle} ${isActive ? activeStyle : ""}`
           }
         >
-          <div className="p-2 rounded bg-brand bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300">
-            <img className="w-5 h-5" src={assets.add_icon} alt="Add" />
+          <div className="p-2.5 rounded-lg bg-white bg-opacity-10 group-hover:bg-opacity-20 transition-all duration-300 backdrop-blur-sm">
+            <img
+              className="w-4 h-4 filter brightness-0 invert"
+              src={assets.add_icon}
+              alt="Add"
+            />
           </div>
-          <span className="text-base">Add Products</span>
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">Add Products</span>
+            <span className="text-xs text-gray-300 opacity-60">
+              Create New Items
+            </span>
+          </div>
         </NavLink>
 
         <NavLink
@@ -83,10 +121,19 @@ const Sidebar = ({ closeSidebar }) => {
             `${linkStyle} ${isActive ? activeStyle : ""}`
           }
         >
-          <div className="p-2 rounded bg-brand bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300">
-            <img className="w-5 h-5" src={assets.order_icon} alt="List" />
+          <div className="p-2.5 rounded-lg bg-white bg-opacity-10 group-hover:bg-opacity-20 transition-all duration-300 backdrop-blur-sm">
+            <img
+              className="w-4 h-4 filter brightness-0 invert"
+              src={assets.order_icon}
+              alt="List"
+            />
           </div>
-          <span className="text-base">Product Inventory</span>
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">Product Inventory</span>
+            <span className="text-xs text-gray-300 opacity-60">
+              Manage Products
+            </span>
+          </div>
         </NavLink>
 
         <NavLink
@@ -96,19 +143,49 @@ const Sidebar = ({ closeSidebar }) => {
             `${linkStyle} ${isActive ? activeStyle : ""}`
           }
         >
-          <div className="p-2 rounded bg-brand bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300">
-            <img className="w-5 h-5" src={assets.order_icon} alt="Order" />
+          <div className="p-2.5 rounded-lg bg-white bg-opacity-10 group-hover:bg-opacity-20 transition-all duration-300 backdrop-blur-sm">
+            <img
+              className="w-4 h-4 filter brightness-0 invert"
+              src={assets.order_icon}
+              alt="Order"
+            />
           </div>
-          <span className="text-base">Customer Orders</span>
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">Customer Orders</span>
+            <span className="text-xs text-gray-300 opacity-60">
+              Order Management
+            </span>
+          </div>
         </NavLink>
+      </div>
 
-        <div className="pt-8 mt-8 border-t border-gray-500 border-opacity-50">
-          <div className="px-4 py-3 rounded-lg bg-secondary bg-opacity-30 text-gray-200 text-sm">
-            <p className="font-semibold mb-1">Need Help?</p>
-            <p className="opacity-80">
-              Check the documentation or contact support for assistance.
-            </p>
+      {/* Help Section */}
+      <div className="p-6 border-t border-white border-opacity-10">
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-white to-gray-100 bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="font-semibold text-white">Need Help?</h3>
           </div>
+          <p className="text-sm text-gray-300 opacity-80 mb-3">
+            Check the documentation or contact support for assistance.
+          </p>
+          <button className="w-full py-2 px-4 rounded-xl bg-white bg-opacity-10 text-white text-sm font-medium hover:bg-opacity-20 transition-all duration-300">
+            Get Support
+          </button>
         </div>
       </div>
     </aside>

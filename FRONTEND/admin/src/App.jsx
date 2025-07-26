@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const backendUrl = "http://localhost:4000";
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 // console.log("Backend URL:", backendUrl);
 
 // Currency symbol (Bangladeshi Taka)
@@ -55,10 +55,7 @@ const App = () => {
             <main className="flex-1 overflow-auto p-4">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route
-                  path="/dashboard"
-                  element={<Dashboard />}
-                />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/add" element={<Add token={token} />} />
                 <Route path="/list" element={<List token={token} />} />
                 <Route path="/order" element={<Orders token={token} />} />
