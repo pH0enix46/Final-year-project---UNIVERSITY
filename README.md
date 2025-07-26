@@ -1,34 +1,22 @@
-# 🛠️ Originally developed by [pH0enix46](https://github.com/pH0enix46)
+# 🛠️ Developed by [pH0enix46](https://github.com/pH0enix46)
 
-## You can use this project for your university project or any other project, but remember to give proper credit to the original developer. ENJOY!!
+## Machaven – Computer Accessories eCommerce Platform
 
-<a href="https://machaven.netlify.app/">✅ client link</a>
+This project was initially developed as part of an academic final-year submission at **Varendra University**. It demonstrates a complete MERN stack-based eCommerce solution, designed for both users and administrators
 
-<a href="https://machaven-admin.netlify.app/">✅ admin link</a> admin email: "machaven@gmail.com" & password: "machaven4646@"
+---
 
-## Technologies used
+## 🌐 Live Links
 
-- [x] React
-- [x] Tailwind CSS
-- [x] DaisyUI
-- [x] Vite
-- [x] React Router
-- [x] React Icons
-- [x] React Toastify
-- [x] Recharts
-- [x] Axios
-- [x] JWT
-- [x] Node.js
-- [x] Express
-- [x] Mongoose
-- [x] Nodemon
-- [x] dotenv
-- [x] CORS
-- [x] Bcrypt
-- [x] Multer
-- [x] Cloudinary
-- [x] Socket.io
-- [x] Stripe
-- [x] Validator
+- ✅ **Client Website:** [https://machaven.netlify.app/](https://machaven.netlify.app/)
+- ✅ **Admin Dashboard:** [https://machaven-admin.netlify.app/](https://machaven-admin.netlify.app/)
+  - **Admin Email:** `machaven@gmail.com`
+  - **Admin Password:** `machaven4646@`
 
-## This project is based on my University (Varendra University)
+---
+
+## 📌 Licensing and Credit
+
+You are welcome to use this project for learning, academic, or development purposes. However, **please give proper credit to the original developer**.
+
+> Built with ❤️ by [pH0enix46](https://github.com/pH0enix46)
